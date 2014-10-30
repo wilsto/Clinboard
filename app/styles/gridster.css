@@ -1,0 +1,176 @@
+/*! gridster.js - v0.2.1 - 2013-10-28
+* http://gridster.net/
+* Copyright (c) 2013 ducksboard; Licensed MIT */
+
+.gridster {
+  position: relative;
+  margin: auto;
+  background: rgba(0, 0, 0, .1);
+  height: 0;
+}
+
+.gridster-loaded {
+  -webkit-transition: height .3s;
+}
+
+.gridster-loaded {
+    -moz-transition: height .3s;
+    -o-transition: height .3s;
+    transition: height .3s;
+}
+
+.gridster ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.gridster .gridster-item {
+  -webkit-box-sizing: border-box;
+}
+
+.gridster .gridster-item {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  list-style: none;
+  list-style: none;
+  z-index: 2;
+  position: absolute;
+  display: none;
+}
+
+.gridster-loaded .gridster-item  {
+  display: block;
+}
+
+.gridster-loaded .gridster-item {
+  -webkit-transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+}
+
+.gridster-loaded .gridster-item {
+    -moz-transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+    -o-transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+    transition: opacity .3s, left .3s, top .3s, width .3s, height .3s;
+}
+
+.gridster-mobile .gridster-item {
+  position: static;
+  float: none;
+}
+
+.gridster .gridster-preview-holder {
+  display: none;
+    z-index: 1;
+    position: absolute;
+    background-color: #fff;
+    border-color: #fff;
+    opacity: 0.2;
+}
+
+.gridster .gridster-item-moving,
+.gridster .gridster-preview-holder {
+  -webkit-transition: opacity 0s, left 0s, top 0s, width 0s, height 0s;
+}
+
+.gridster .gridster-item-moving,
+.gridster .gridster-preview-holder {
+    -moz-transition: opacity 0s, left 0s, top 0s, width 0s, height 0s;
+    -o-transition: opacity 0s, left 0s, top 0s, width 0s, height 0s;
+    transition: opacity 0s, left 0s, top 0s, width 0s, height 0s;
+}
+
+.gridster .gridster-item-moving {
+  z-index: 3;
+}
+
+
+.container {
+  margin: auto;
+  max-width: 100%;
+}
+
+.gridster .gridster-item {
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.gridster .gridster-item {
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  color: #004756;
+}
+
+.gridContentGreen{
+background: #72AA00;
+}
+
+.gridContentRed{
+background: #F03B32;
+}
+
+.gridAll{
+  height: 100%;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.gridster .gridHeader {
+  width:100%;
+  background: #ffffff;
+}
+.gridster .gridContent {
+  width:100%;
+  color:#ffffff;
+  background: #72AA00;
+}
+.gridster .gridContent {
+  width:100%;
+  color:#ffffff;
+  background: #72AA00;
+}
+
+.gridster .gridFooter {
+  width:100%;
+  position: absolute; 
+  bottom: 0; 
+  left: 0;
+  color:#ffffff;
+}
+
+.gridFooterGreen{
+  background: #649B02;
+}
+.gridFooterRed{
+  background: #CB3D29;
+}
+
+
+.gridster .gridGraph {
+width:100%;
+position: absolute; 
+bottom: 0; 
+left: 0;
+}
+
+.contentValue {
+padding-top: 10px;
+width: 100%;
+height: 50%;
+font-size: 44px;
+text-align: center;
+}
+.contentUnit {
+padding-left: 3px;
+text-align: left;
+height: 50%;
+vertical-align: bottom;
+}
+.contentfooter {
+padding-right:5px;
+float: right;
+color: #ddd;
+}
+
+.gridbutton {
+padding:20px;
+float: right;
+}

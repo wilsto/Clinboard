@@ -1,0 +1,101 @@
+
+<!-- Main bar - data -->
+<div id="panel-main" class="panel">
+  <div  style="width:100%;height:35px;background:#e7e7e7;color:#000000">
+
+    <span style="margin-left:10px;">
+      <b>Zoom  ---</b> Axe : 
+    <a id="axeminus" href="#" class="btn btn-mini"><span class="glyphicon glyphicon-minus"></span></a>
+    <span  id="axezoom">1</span>
+    <a id="axeplus"  href="#" class="btn btn-mini"><span class="glyphicon glyphicon-plus"></span></a>
+    <a href="#" class="btn btn-mini"><span class="glyphicon glyphicon-expand"></span></a>
+    <a href="#" class="btn btn-mini"><span class="glyphicon glyphicon-collapse-top"></span></a>
+    </span>
+
+    <span style="margin-left:10px;">
+      Activities : 
+    <a id="activityminus"href="#" class="btn btn-mini"><span class="glyphicon glyphicon-minus"></span></a>
+    <span id="activityzoom">1</span>
+    <a  id="activityplus"href="#" class="btn btn-mini"><span class="glyphicon glyphicon-plus"></span></a>
+        <a href="#" class="btn btn-mini"><span class="glyphicon glyphicon-expand"></span></a>
+    <a href="#" class="btn btn-mini"><span class="glyphicon glyphicon-collapse-top"></span></a>
+    </span>
+
+    <span style="margin-left:10px;">
+      Contexte : 
+    <a id="contexteminus" href="#" class="btn btn-mini"><span class="glyphicon glyphicon-minus"></span></a>
+    <span id="contextezoom">1</span>
+    <a  id="contexteplus" href="#" class="btn btn-mini"><span class="glyphicon glyphicon-plus"></span></a>
+        <a href="#" class="btn btn-mini"><span class="glyphicon glyphicon-expand"></span></a>
+    <a href="#" class="btn btn-mini"><span class="glyphicon glyphicon-collapse-top"></span></a>
+    </span>
+    <span style="margin-left:30px;color:#FFFFFF"></span>
+        <span class="optionbutton"  title="Regrouper toute la hiérarchie" onclick="dataView.collapseAllGroups()">
+      <img class="optionbuttonimg" src="../images/Image-Edition-Tools-Collapse-icon.png">
+    </span>
+    <span class="optionbutton"   title="Dégrouper toute la hiérarchie" onclick="dataView.expandAllGroups()">
+      <img class="optionbuttonimg" src="../images/Image-Edition-Tools-Expand-icon.png">
+    </span>
+    <span class="optionbutton"  title="Mode tableau" onclick="dataView.setGrouping([])">
+      <img class="optionbuttonimg" src="../images/Timeline-List-Grid-List-icon.png">
+    </span>
+    <span class="optionbutton"  title="Mode Groupe" onclick="groupByAxeContexteActivity()">
+      <img class="optionbuttonimg" src="../images/app-contents-icon.png">
+    </span>
+    <span class="optionbutton"   title="Rafraichir" onclick="loadData()">
+      <img class="optionbuttonimg" src="../images/Very-Basic-Refresh-icon.png">
+    </span>
+  </div>  
+  <div id="search_box_container"></div>
+    <div id="myGrid" style="width:100%;height:93%;"></div>
+    <div id="pager" style="width:100%;height:20px;"></div>
+</div>
+<div class="slick-columnpicker" style="display:none;position:absolute;z-index:20;"></div>
+
+
+<!--  JQUERY UI -->
+<script src="_custom/jquery/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="_custom/jquery/jquery.event.drag-2.2.js"></script>
+
+<!--  SLICK GRID -->
+<script src="_custom/slickGrid/slick.core.js"></script>
+<script src="_custom/slickGrid/slick.formatters.js"></script>
+<script src="_custom/slickGrid/slick.editors.js"></script>
+<script src="_custom/slickGrid/slick.cellrangedecorator.js"></script>
+<script src="_custom/slickGrid/slick.cellrangeselector.js"></script>
+<script src="_custom/slickGrid/slick.cellselectionmodel.js"></script>
+<script src="_custom/slickGrid/slick.rowselectionmodel.js"></script>
+<script src="_custom/slickGrid/slick.rowmovemanager.js"></script>
+<script src="_custom/slickGrid/slick.grid.js"></script>
+<script src="_custom/slickGrid/slick.groupitemmetadataprovider.js"></script>
+<script src="_custom/slickGrid/slick.dataview.js"></script>
+<script src="_custom/slickGrid/slick.pager.js"></script>
+<script src="_custom/slickGrid/slick.columnpicker.js"></script>
+<script src="_custom/slickGrid/slick.headermenu.js"></script>
+<script src="_custom/slickGrid/slick.headerbuttons.js"></script>
+
+<!--  HIGH CHARTS -->
+<script src="_custom/highcharts.js"></script>
+<!-- <script src="_custom/visualsearch/jquery.sparkline.min.js"></script> -->
+
+<!--  VISUAL SEARCH -->
+<script src="_custom/backbone-0.9.10.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/visualsearch.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/views/search_box.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/views/search_facet.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/views/search_input.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/models/search_facets.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/models/search_query.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/utils/backbone_extensions.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/utils/hotkeys.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/utils/jquery_extensions.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/utils/search_parser.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/utils/inflector.js" type="text/javascript" charset="utf-8"></script>
+<script src="_custom/visualsearch/templates/templates.js" type="text/javascript" charset="utf-8"></script>
+
+<!--  CUSTOM JS -->
+<script src="_custom/visualsearch_init.js"></script>
+<script src="_custom/SideBar.js"></script>
+
+<script src="_custom/init.js" type="text/javascript"></script>
+<script src="_custom/MainGrid.js"></script>

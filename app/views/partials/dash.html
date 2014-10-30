@@ -1,0 +1,111 @@
+
+<!--* Modal Part-->
+
+<!-- Layout Part -->
+
+
+<div class="stretch col-md-12" id="home">
+
+  <h2>Dashboard : Objectifs annuels</h2>
+
+  <div class="row cards" >
+
+    <div class="card-container col-lg-3 col-sm-6 col-sm-12" ng-repeat="widget in widgets">
+      <div class="card card-slategray hover">
+        <div class="front"> 
+
+          <div class="media">        
+            <span class="pull-left" style="margin-right:20px;">
+              <h2><span class="glyphicon glyphicon-record"></span></h2>
+            </span>
+
+            <div class="media-body">
+              <small>{{widget.name}}</small>
+              <h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">{{widget.mesureVal}} <small> / {{widget.reference}}</small></h2>
+            </div>
+          </div> 
+
+          <div class="progress-list">
+            <div class="details">
+              <div class="title">Vue {{widget.groupBy}}</div>
+            </div>
+            <div class="status pull-right bg-transparent-black-1">
+              <span class="animate-number" data-value="{{widget.percentObjectif}}" data-animation-duration="1500">{{widget.percentObjectif}}</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="progress progress-little progress-transparent-black">
+              <div class="progress-bar animate-progress-bar progress-bar-green" data-percentage="{{widget.percentObjectif}}" style="width: {{widget.percentObjectif}};"></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="back">
+          <a href="#">
+            <i class="fa fa-bar-chart-o fa-4x"></i>
+            <span>Check Summary</span>
+          </a>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br/><br/>
+  <div gridster>
+    <ul>
+      <li gridster-item="item" ng-repeat="item in standardItems" ng-class="gridContentColor(item)">
+        <div class="gridAll">
+          <div class="gridHeader"><span style="float:right;right:5px" class="glyphicon glyphicon-edit"></span></div>
+
+          <div class="gridContent">                                    <div class="media">                   
+            <span class="pull-left">
+              <i class="fa fa-eye media-object"></i>
+            </span>
+
+            <div class="media-body">
+              {{item.name}}
+              <h2 class="media-heading animate-number" data-value="{{item.value}}" data-animation-duration="1500">{{item.value}}</h2>
+            </div>
+
+          </div> 
+
+        </div> 
+
+        <div class="progress-list">
+          <div class="details">
+            <div class="title">This month plan %</div>
+          </div>
+          <div class="status pull-right bg-transparent-black-1">
+            <span class="animate-number" data-value="83" data-animation-duration="1500">83</span>%
+          </div>
+          <div class="clearfix"></div>
+          <div class="progress progress-little progress-transparent-black">
+            <div class="progress-bar animate-progress-bar" data-percentage="83%" style="width: 83%;"></div>
+          </div>
+        </div>
+        <div class="gridGraph" ng-show="item.sizeY > 1 && item.sizeX > 1">
+         <nvd3-stacked-area-chart
+         data="exampleData"
+         width="380"
+         height="280"
+         showXAxis="true"
+         showYAxis="true"
+         color="colorFunction()">
+       </nvd3-stacked-area-chart>
+       <br/>
+     </div>
+     <div onclick="location.href='/dash';" style="cursor:pointer;" class="gridFooter" ng-class="gridFooterColor(item)">voir le détail <span style="float:right;right:5px"class="glyphicon glyphicon-circle-arrow-right"></span></div>
+   </div>
+ </li>
+</ul>
+</div>
+
+<div class="gridbutton">
+  <button class="btn btn-default" ng-click="openIndicateur({})">Ajouter un indicateur</button>
+</div>
+
+</div>    
+
+<script type="text/javascript">
+          //sparkline charts
+
+        </script>

@@ -1,0 +1,251 @@
+<!--* Modal Part-->
+
+<script type="text/ng-template" id="myModalContent.html">
+	<div class="modal-header">
+		<h3>Ajouter</h3>
+	</div>
+	<div class="modal-body">
+		<!-- FORM -->
+
+		<!-- NAME -->
+		<div id="name-group" class="form-group">
+			<label>Nom</label>
+			<input type="text" name="name" class="form-control"  ng-model="formData.name" placeholder="Entrer le nom">
+			<span class="help-block">
+			</span>
+		</div>
+
+		<!-- REF1 NAME -->
+		<div id="parent-group" class="form-group">
+			<label>Contexte</label>
+			<input type="text" name="contexte" class="form-control" ng-model="contexte" typeahead-on-select="setContextId($item)"  typeahead="contexte.name for contexte in contextes | filter:$viewValue" placeholder="Indiquer le contexte">
+			<span class="help-block">
+			</span>
+		</div>
+
+		<!-- REF2 NAME -->
+		<div id="parent-group" class="form-group">
+			<label>Activité</label>
+			<input type="text" name="refActivity" class="form-control" ng-model="parent" typeahead-on-select="setActivityId($item)"  typeahead="activity.name for activity in activities | filter:$viewValue" placeholder="Indiquer  l'activité">
+			<span class="help-block">
+			</span>
+		</div>
+
+		<pre>
+			{{ formData }}
+		</pre>
+
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="cancel()">Annuler</button>
+		<button class="btn btn-success" ng-click="ok()">Mise à jour</button>
+	</div>
+
+</script>
+
+<script type="text/ng-template" id="myMesureContent.html">
+	<div class="modal-header">
+		<h3>Ajouter</h3>
+	</div>
+	<div class="modal-body">
+		<!-- FORM -->
+
+		<!-- date -->
+		<div class="row">
+			<div class="col-md-6">  <h4>Début Tache</h4>
+				<p class="input-group">
+					<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.startDate" is-open="opened2" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Fermer" placeholder="Entrer la date de début de la tache" />
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-click="open2($event)">
+							<span class="glyphicon glyphicon-chevron-down">
+							</span>
+						</button>
+					</span>
+				</p>
+			</div>
+			<div class="col-md-6">  <h4>Fin Tache</h4>
+				<p class="input-group">
+					<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.endDate" is-open="opened3" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Fermer" placeholder="Entrer la date de début de la tache" />
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-click="open3($event)">
+							<span class="glyphicon glyphicon-calendar">
+							</span>
+						</button>
+					</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- date -->
+		<div class="row">
+			<div class="col-md-4">  
+				<p class="input-group">
+					<label>Charge</label>
+					<input type="text" name="charge" class="form-control"  ng-model="formData.charge" placeholder="Entrer la charge">
+					<span class="help-block">
+					</span>
+
+				</p>
+			</div>
+
+			<div class="col-md-4">  
+				<p class="input-group">
+					<label>% avancement</label>
+					<input type="text" name="avancement" class="form-control"  ng-model="formData.avancement" placeholder="Entrer le pourcentage d'avancement">
+					<span class="help-block">
+					</span>
+
+				</p>
+			</div>
+			<div class="col-md-4">  
+				<p class="input-group">
+					<label>Statut</label>
+					<input type="text" name="status" class="form-control" ng-model="formData.status" typeahead-on-select="$item"  typeahead="statut.name for statut in taskStatus" placeholder="Entrer le statut">
+					<span class="help-block">
+					</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- date -->
+		<div class="row">
+			<div class="col-md-4">
+				<p class="input-group">
+					<label>Date</label>
+					<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.date" is-open="opened1" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Fermer" placeholder="Entrer la date de la mesure"/>
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-click="open1($event)">
+							<span class="glyphicon glyphicon-calendar">
+							</span>
+						</button>
+					</span>
+				</p>
+			</div>
+			<div class="col-md-4">  
+				<p class="input-group">
+					<label>Etat de progression</label>
+					<input type="text" name="progress" class="form-control" ng-model="formData.progress" typeahead-on-select="$item"  typeahead="progress.name for progress in progressStatus" placeholder="Entrer l'état de progression">
+					<span class="help-block">
+					</span>
+
+				</p>
+			</div>
+			<div class="col-md-4">  
+				<p class="input-group">
+					<label>% confiance</label>
+					<input type="text" name="confiance" class="form-control"  ng-model="formData.confiance" placeholder="Entrer le pourcentage de confiance">
+					<span class="help-block">
+					</span>
+
+				</p>
+			</div>
+		</div>
+
+
+		<!-- date -->
+		<div class="row">
+			<div class="col-md-12">  
+					<label>Comments</label>
+					<textarea name="Comments" class="form-control" rows="4" ng-model="formData.Comments" placeholder="Add a comment (optional)"></textarea>
+			</div>
+		</div>
+
+		<div ng-show="debug==true">
+
+			SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED 
+			<pre>
+				{{ formData }}
+			</pre>
+		</div>
+	</div>
+		<div class="modal-footer">
+		<div style="float:left"><button class="btn btn-alert" ng-click="debug=!debug">Debug Mode</button><button ng-show='formData._id' class="btn btn-danger" ng-click="DeleteData(formData._id)">Delete Mesure</button></div>
+		<div style="float:right">
+			<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+			<button class="btn btn-success" ng-click="ok()">Update</button>
+		</div>
+	</div>
+
+</script>
+
+
+<!-- Layout Part -->
+
+<div class="stretch col-md-12" id="home">
+
+	<div id="mesure" class="tab-pane">
+		<h1> Taches<button class="pull-right btn btn-primary" ng-click="open('taches')">Ajouter une tache</button></h1>
+
+		<accordion close-others="true">
+			<accordion-group ng-repeat="tache in taches">
+			<accordion-heading >
+			<div ng-click="opened(tache, $index)" >
+				<div style="width:40px;float:left;margin-left:-15px;">
+					<div class="led" ng-class="{'led-green':tache.Mesures[tache.Mesures.length-1].progress == 'On time','led-orange':tache.Mesures[tache.Mesures.length-1].progress == 'At Risk','led-red':tache.Mesures[tache.Mesures.length-1].progress == 'Late'}"></div>
+				</div>
+
+				<div class="pull-right col-sm-2">
+					<span class="leger">{{tache.Mesures[tache.Mesures.length-1].startDate | date:'shortDate'}}</span><progressbar value="tache.Mesures[tache.Mesures.length-1].avancement" type="success"><b>{{tache.Mesures[tache.Mesures.length-1].avancement}}%</b></progressbar>
+					<span class="pull-right leger"> {{tache.Mesures[tache.Mesures.length-1].endDate | date:'shortDate'}}</span>
+				</div>
+				<div class="pull-right col-sm-1">
+					<button class="pull-right btn btn-danger" ng-click="open('taches')" ng-show="isShowingDetail($index)">Supprimer</button></h1> 
+				</div>
+				<div class="pull-right col-sm-1">
+					<button class="pull-right btn btn-default" ng-click="open('taches')" ng-show="isShowingDetail($index)">Modifier</button></h1> 
+				</div>
+
+				{{tache.name}}<br/>
+				<span class="leger">Contexte : {{tache.Contexte.name}} <br/>
+					Activité : {{tache.Activity.name}}</span>
+
+			</div>
+			</accordion-heading>
+
+			<h4>Mesures <input type="text" ng-model="search" style="float:right" class="pull-right search-query" placeholder="Filtrer"></h4>
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>Saisie</th>
+						<th>Activity</th>
+						<th>Context</th>
+						<th>Début</th>
+						<th>Charge</th>
+						<th>Status</th>
+						<th>Progress</th>
+						<th>Confiance</th>
+						<th>Fin</th>
+						<th>Comments</th>
+						<th><button ng-click='openMesure(tache.Mesures[tache.Mesures.length-1],true)' type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="mesure in mesures | filter:search | orderBy:'date'" ng-show="mesure._id">
+						<td>{{mesure.date | date:'shortDate'}}</td>
+						<td>{{mesure.Activity}}</td>
+						<td>{{mesure.Contexte}}</td>
+						<td>{{mesure.startDate | date:'shortDate'}}</td>
+						<td>{{mesure.charge}}</td>
+						<td>{{mesure.status}}</td>
+						<td>{{mesure.avancement}}% - {{mesure.progress}}</td>
+						<td>{{mesure.confiance}}</td>
+						<td>{{mesure.endDate | date:'shortDate'}}</td>
+						<td>{{mesure.Comments}}</td>
+						<td style="width:25px">
+							<button ng-click="openMesure(mesure,false)"type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</accordion-group>
+
+	</accordion>
+
+
+
+</div>
+</div>
+
+
+

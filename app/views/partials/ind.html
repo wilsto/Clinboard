@@ -1,0 +1,137 @@
+
+<!-- Main bar - data -->
+<div class="stretch col-md-12">        
+    <div class="pull-right">
+        <button class="btn btn-default" ng-click="openIndicateur({})">Ajouter un indicateur</button>
+    </div>
+    <div id="panel-main" class="panel">
+        <div class="stretch col-md-11" >
+            <table ng-table="tableParams" template-pagination="custom/pager" class="table">
+                  <tbody ng-repeat="ind in $data" ng-switch="row.edit" ng-init="row={}">
+                <tr >
+                    <td data-title="''"  width="10">
+                     <img ng-if="ind._type == 1" src="images/Target-20.png">
+                 </td>
+                 <td data-title="'Name'">
+                    {{ind.name}}<br/>
+                    <span class="leger">{{ind.Activity}} > {{ind.Contexte}} > {{ind.Axe}} </span>
+                </td>
+                <td data-title="'Mesure'" sortable="mesureVal">
+                    {{ind.mesureVal}}
+                    <span class="leger"> sur {{ind.mesuresNb}} mesures </span><br/>
+                    <span class="leger"> last value : {{ind.ageVal}} jours </span>
+                </td>
+                <td data-title="'Alerte'" width="100">
+
+                </td>
+                <td data-title="'Objectif'" width="100" sortable="percentObjectif">
+                    <span ng-class="{ 'plus': ind.percentObjectif >= 0,'minus': ind.percentObjectif < 0 }">{{ind.percentObjectif}}</span>
+                </td>
+
+                <td data-title="'Confiance'" width="50">
+                    <ul class="activity-wrap" ng-repeat="mesure in ind._mesures | limitTo:10">
+                        <li><a href="#" data-title="" original-title="" ><span class="bar" ng-class="{'bar-red' : mesure.confiance <= 25, 'bar-orange' : mesure.confiance <= 50, 'bar-green' : mesure.confiance <= 100}" style="height: {{ (Math.max(mesure.confiance * 0.29 ,1) )}}px;">0</span></a></li>
+                    </ul>
+                    <ul class="activity-wrap">
+                        <li ><a href="#" data-title="" original-title=""><span class="leger"> {{ind.confiance}}%</span></a></li> 
+                    <ul>
+                </td>
+                <td data-title="'Anticip.'" width="100">
+                   
+                </td>
+                <td data-title="'Actions'" width="100">
+                    <a  href="" class="btn btn-default" ng-click="openDetail(ind, $index);"> <span class="glyphicon glyphicon-zoom-in"></span> Details</a>
+                </td>
+            </tr>
+            <tr ng-show="isShowingDetail($index)">
+              <td colspan="8">
+                    <div class="strecth  col-md-10">
+                        <div id="info"  ng-show="tabactive=='info'">
+                            Cet indicateur est de type <span class="focusValue">Objectif</span>  <br/><br/>
+                            Il réalise un calcul sur chaque mesure <span editable-select="indDetail.type" onbeforesave="updateInd('type',$data)" e-ng-options="s.value as s.text for s in types">{{indDetail.type}}</span> comprise dans le périmètre suivant :<br/>
+                            <ul>
+                                <li>Contexte : <span class="focusValue">{{indDetail.Contexte}}.*</span> </li>
+                                <li>Activités : <span class="focusValue">{{indDetail.Activity}}.* </span> </li>
+                                <li>Axe :  <span class="focusValue">{{indDetail.Axe}}.*</span></li>
+                                <li>Temps :  <span class="focusValue">Tout</span></li>
+                            </ul>
+                            L'indicateur réalise la/le <span editable-select="indDetail.action" onbeforesave="updateInd('action',$data)" e-ng-options="s.value as s.text for s in actions">{{indDetail.action || 'vide' }}</span> des mesures de <span  editable-select="indDetail.type" onbeforesave="updateInd('type',$data)" e-ng-options="s.value as s.text for s in types">  {{indDetail.type || 'vide' }}</span> avec les valeurs suivantes : <span  editable-text="indDetail.typedetails" onbeforesave="updateInd('typedetails',$data)">  {{indDetail.typedetails || 'all' }}</span><br/> 
+                            Sa valeur de référence est : <span  editable-select="indDetail.reftype" onbeforesave="updateInd('reftype',$data)" e-ng-options="s.value as s.text for s in types">{{indDetail.reftype || 'vide' }}</span> avec les valeurs suivantes : <span  editable-text="indDetail.reftypedetails" onbeforesave="updateInd('reftypedetails',$data)">  {{indDetail.reftypedetails || 'all' }}</span><br/> 
+                            <br/>
+                            Les valeurs sont groupées dans le temps par <span  editable-select="indDetail.groupBy" onbeforesave="updateInd('groupBy',$data)" e-ng-options="s.value as s.text for s in groupByTime">{{indDetail.groupBy || 'vide' }}</span> et nécessite des valeurs rafraichies tous les <span editable-text="indDetail.refresh" onbeforesave="updateInd('refresh', $data)">{{indDetail.refresh || 'vide' }}</span> jours <br/>
+                        </div>
+
+                        <div id="taches"  ng-show="tabactive=='task'">
+                            dfshhdfhtjsdfjfgkd oodrfoj dfhoj
+                        </div>
+
+                        <div id="mesures"  ng-show="tabactive=='mesure'">
+                            <table ng-table="tableParams2"  class="table">
+                                <tbody ng-repeat="mesure in indMesures | orderBy:date">
+                                    <tr >
+                                         <td data-title="'Contexte'">{{mesure.Contexte}}</td>
+                                         <td data-title="'Activité'">{{mesure.Activity}}</td>
+                                         <td data-title="'Début'">{{mesure.startDate | date:'dd MMM yyyy'}}</td>
+                                         <td data-title="'Fin'">{{mesure.endDate | date:'dd MMM yyyy'}}</td>
+                                         <td data-title="'Charge'">{{mesure.charge}}</td>
+                                         <td data-title="'Avancement'">{{mesure.avancement}}</td>
+                                         <td data-title="'Status'">{{mesure.status}}</td>
+                                         <td data-title="'Progress'">{{mesure.progress}}</td>
+                                         <td data-title="'Date'">{{mesure.date | date:'dd MMM yyyy'}}</td>
+                                         <td data-title="'Confiance'">{{mesure.confiance}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="history"  ng-show="tabactive=='history'">
+                             oodrfoj dfhoj
+                        </div>
+                    </div>
+                    <div class="pull-right stretch col-md-2">
+                        <ul class="tp-tabs">
+                            <li id="info" ng-class="{active: tabactive=='info'}" ng-click="tabactive='info'">info</li>
+                            <li id="tache"  ng-class="{active: tabactive=='task'}"  ng-click="tabactive='task'">
+                                <span class="item-details-tab-sub-header" >tache</span>
+                                <span class="item-details-tab-sub-header item-count" >3</span>
+                            </li>
+                            <li id="mesure"  ng-class="{active: tabactive=='mesure'}"   ng-click="tabactive='mesure'">
+                                <span class="item-details-tab-sub-header" >mesure</span>
+                                <span class="item-details-tab-sub-header item-count" > {{indDetail._mesures.length}}</span>
+                            </li>
+                            <li id="historique"  ng-hide="tabactive=='task'"  ng-click="tabactive='history'">historique</li>
+                        </ul>
+                    </div>
+
+              </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+    <script type="text/ng-template" id="custom/pager">
+
+        <ul class="pager ng-cloak">
+          <li ng-repeat="page in pages" ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}" ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+              <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Précédent</a>
+              <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Suivant &raquo;</a>
+          </li>
+          <li> 
+            <div class="btn-group">
+                <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+                <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+                <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+                <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+            </div>
+        </li>
+    </ul>
+    </script>
+
+
+</div>
+
+
+
+

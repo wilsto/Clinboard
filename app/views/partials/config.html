@@ -1,0 +1,134 @@
+
+<!--* Modal Part-->
+
+<script type="text/ng-template" id="myModalContent.html">
+   <div class="modal-header">
+    <h3>Ajouter</h3>
+</div>
+<div class="modal-body">
+    <!-- FORM -->
+
+    <!-- NAME -->
+    <div id="name-group" class="form-group">
+        <label>Nom</label>
+        <input type="text" name="name" class="form-control"  ng-model="formData.name" placeholder="Entrer le nom">
+        <span class="help-block"></span>
+    </div>
+
+    <!-- SUPERHERO NAME -->
+    <div id="parent-group" class="form-group">
+        <label>Hiérarchie</label>
+        <input type="text" name="parent" class="form-control" ng-model="parent" typeahead-on-select="setId($item)"  typeahead="typeahead.name for typeahead in typeaheads | filter:$viewValue" placeholder="Indiquer le niveau de hiérarchie de rattachement">
+        <span class="help-block"></span>
+    </div>
+
+    <!-- REF1 NAME -->
+    <div id="parent-group" class="form-group">
+        <label>Début</label>
+        <input type="text" name="refStart" class="form-control"  ng-model="formData.refStart" placeholder="Indiquer le début">
+        <span class="help-block"></span>
+    </div>
+
+    <!-- REF2 NAME -->
+    <div id="parent-group" class="form-group">
+        <label>Fin</label>
+        <input type="text" name="refEnd" class="form-control"  ng-model="formData.refEnd" placeholder="Indiquer la fin">
+        <span class="help-block"></span>
+    </div>
+
+
+    SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED 
+    <pre>
+
+        {{ formData }}
+    </pre>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="cancel()">Annuler</button>
+    <button class="btn btn-success" ng-click="ok()">Mise à jour</button>
+</div>
+
+</script>
+
+<!-- Layout Part -->
+
+<div id="home">
+    <tabset justified="false">
+        <tab heading="Indicateurs" select="loadData('indicateurs')"></tab>
+        <tab heading="Taches" select="loadData('taches')"></tab>
+        <tab heading="Mesures" select="loadData('mesures')"></tab>
+        <tab heading="Contexte" select="loadData('contextes')"></tab>
+        <tab heading="Activités" select="loadData('activities')"></tab>
+        <tab heading="Axes" select="loadData('axes')"></tab>
+    </tabset>
+    <div class="stretch col-md-11" >
+
+        <table ng-table="tableParams" template-pagination="custom/pager" show-filter="true" class="table">
+            <thead>
+                <tr>
+                    <th ng-repeat="column in columns" ng-show="column.visible"
+                    class="text-center sortable" ng-class="{
+                    'sort-asc': tableParams.isSortBy(column.field, 'asc'),
+                    'sort-desc': tableParams.isSortBy(column.field, 'desc')
+                }"
+                ng-click="tableParams.sorting(column.field, tableParams.isSortBy(column.field, 'asc') ? 'desc' : 'asc')">
+                {{column.title}}
+            </th>
+            <th>
+              <span style="margin:8px"><button class="btn btn-primary" ng-click="open(dataType,{})">Ajouter {{dataType}}</button></span>
+
+          </th>
+      </tr>
+      <tr>
+          <th ng-repeat="column in columns"
+          ng-show="column.visible"
+          class="text-center sortable"
+          >
+          <input type="text" class="form-control"
+          ng-model="filter_row[column.field] "/>
+      </th>
+      <th>
+        <div><strong>Page:</strong> {{tableParams.page()}} / {{Math.ceil(tableParams.total() /tableParams.count())}} </div>
+        <div><strong>Lignes totales:</strong> {{tableParams.total()}} </div>
+
+    </th>
+</tr>
+</thead>
+<tbody>
+    <tr ng-repeat="rowdata in $data">
+        <td ng-repeat="column in columns" ng-show="column.visible" sortable="column.field">
+            <span ng-if="!rowdata.$edit">{{rowdata[column.field]}}</span>
+            <div ng-if="rowdata.$edit"><input class="form-control" type="text" ng-model="rowdata[column.field]" /></div>
+
+        </td>
+        <td data-title="'Actions'" width="200">
+            <a ng-if="!rowdata.$edit" href="" class="btn btn-default " ng-click="rowdata.$edit = true"> <span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+            <a ng-if="rowdata.$edit" href="" class="btn btn-primary " ng-click="saveData(rowdata)"> <span class="glyphicon glyphicon-floppy-disk"></span> Enregistrer</a>
+            <a ng-if="rowdata.$edit" href="" class="btn btn-danger" ng-click="rowdata.$edit = false"> <span class="glyphicon glyphicon-trash"></span> Supprimer</a>
+        </td>
+    </tr>
+</tbody>
+</table>
+
+</div>
+
+<script type="text/ng-template" id="custom/pager">
+
+    <ul class="pager ng-cloak">
+      <li ng-repeat="page in pages" ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}" ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+          <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Précédent</a>
+          <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Suivant &raquo;</a>
+      </li>
+      <li> 
+        <div class="btn-group">
+            <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+            <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+            <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+            <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+        </div>
+    </li>
+</ul>
+</script>
+
+</div>    

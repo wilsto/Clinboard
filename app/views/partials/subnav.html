@@ -1,0 +1,78 @@
+<div class="navbar navbar-default" id="subnav">
+  <div class="col-md-12">
+    <div class="navbar-header">
+
+      <a href="#" id="homeBtn"
+         class="navbar-btn btn btn-default btn-plus dropdown-toggle" 
+         data-toggle="dropdown">
+        <i class="glyphicon glyphicon-th-list dnav-list"></i> 
+        Menu <small><i class="glyphicon glyphicon-chevron-down"></i></small>
+      </a>
+      <ul class="nav dropdown-menu">
+        <li>
+          <a href="/">
+            <i class="glyphicon glyphicon-home dnav-list">&nbsp;</i> Accueil
+          </a>
+        </li>
+        <li>
+          <a href="/dash">
+            <i class="glyphicon glyphicon-dashboard dnav-list">&nbsp;</i> Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="/ind">
+            <i class="glyphicon glyphicon-list dnav-list">&nbsp;</i> Indicateurs
+          </a>
+        </li>
+        <li>
+          <a href="/mesures">
+            <i class="glyphicon glyphicon-inbox dnav-list">&nbsp;</i> Informer
+          </a>
+        </li>
+        <li class="nav-divider"></li>
+        <li>
+          <a href="/config">
+            <i class="glyphicon glyphicon-cog dnav-list">&nbsp;</i> Configuration
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            <i class="glyphicon glyphicon-user dnav-list">&nbsp;</i> Profile
+          </a>
+        </li>
+      </ul>
+
+      <button type="button" 
+         class="navbar-toggle" 
+         data-toggle="collapse" 
+         data-target="#navbar-collapse2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse2">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active">
+          <a class="cd-btn">Modifier le périmètre</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script>jQuery(document).ready(function($){
+  //open the lateral panel
+  $('.cd-btn').on('click', function(event){
+    event.preventDefault();
+    $('.cd-panel').addClass('is-visible');
+  });
+  //clode the lateral panel
+  $('.cd-panel').on('click', function(event){
+    if( $(event.target).is('.cd-panel') || $(event.target).is('.cd-panel-close') ) { 
+      $('.cd-panel').removeClass('is-visible');
+      event.preventDefault();
+    }
+  });
+});</script>

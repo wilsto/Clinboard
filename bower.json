@@ -1,0 +1,29 @@
+{
+  "name": "clin-board",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.2.11",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "jquery": "~1.11.0",
+    "bootstrap": "~3.0.3",
+    "angular-resource": "1.2.11",
+    "angular-cookies": "1.2.11",
+    "angular-sanitize": "1.2.11",
+    "angular-route": "1.2.11",
+    "underscore": "~1.6.0",
+    "angular-bootstrap": "~0.10.0",
+    "jquery-ui": "~1.10.4",
+    "d3": "~3.4.4",
+    "nvd3": "~1.1.15-beta",
+    "angularjs-nvd3-directives": "~0.0.5-beta",
+    "ng-table": "~0.3.1",
+    "angular-xeditable": "~0.1.8"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.11",
+    "angular-scenario": "1.2.11",
+    "angular-xeditable": "~0.1.8"
+  },
+  "testPath": "test/client/spec"
+}
