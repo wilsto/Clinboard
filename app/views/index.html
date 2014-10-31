@@ -102,39 +102,39 @@
                 <span class="help-block"></span>
               </div>
 
-              <!-- REF3 NAME -->
-              <div id="parent-group" class="form-group">
-                <label>Catégorie</label>
-                <input type="text" name="status" class="form-control" ng-model="perimeter.category" typeahead-on-select="$item"  typeahead="statut.name for statut in taskStatus" placeholder="Entrer le statut">
-                <span class="help-block">
-                </span>
-              </div>
 
           <label>Catégories</label>
     <div id="parent-group" class="form-group form-inline">  
 
           <div class="checkbox">
             <label>
-              <input type="checkbox" ng-model='perimeter.category[0]' value="Objectif" checked> Objectif
+              <input type="checkbox" ng-model='perimeter.category[0]'> Objectif
             </label>
           </div>
            <div class="checkbox">
             <label>
-              <input type="checkbox" ng-model='perimeter.category[1]' value="Alerte" checked> Alerte
+              <input type="checkbox" ng-model='perimeter.category[1]'> Alerte
             </label>
           </div>
            <div class="checkbox">
             <label>
-              <input type="checkbox" ng-model='perimeter.category[2]' value="Anticipation" checked> Anticipation
+              <input type="checkbox" ng-model='perimeter.category[2]'> Anticipation
             </label>
           </div>
            <div class="checkbox">
             <label>
-              <input type="checkbox" ng-model='perimeter.category[3]' value="Information" checked> Information
+              <input type="checkbox" ng-model='perimeter.category[3]'> Information
             </label>
           </div>
       </div>
 
+              <!-- REF3 NAME -->
+              <div id="parent-group" class="form-group">
+                <label>Time</label>
+                <input type="text" name="status" class="form-control" ng-model="perimeter.time" typeahead-on-select="$item"  typeahead="statut.name for statut in taskStatus" placeholder="Entrer le time">
+                <span class="help-block">
+                </span>
+              </div>
 <hr/>
               <!-- REF1 NAME -->
               <div id="parent-group" class="form-group">

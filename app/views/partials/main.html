@@ -1,118 +1,3 @@
-
-<!--* Modal Part-->
-
-<script type="text/ng-template" id="myIndicateurContent.html">
-  <div class="modal-header">
-    <h3>Ajouter</h3>
-  </div>
-  <div class="modal-body">
-    <!-- FORM -->
-
-
-    <!-- REF1 NAME -->
-    <div id="parent-group" class="form-group">
-      <label>Contexte</label>
-      <input type="text" name="contexte" class="form-control" ng-model="contexte" typeahead-on-select="setContextId($item)"  typeahead="contexte.name for contexte in contextes | filter:$viewValue" placeholder="Indiquer le contexte">
-      <span class="help-block"></span>
-    </div>
-
-    <!-- REF2 NAME -->
-    <div id="parent-group" class="form-group">
-      <label>Activité</label>
-      <input type="text" name="refActivity" class="form-control" ng-model="activity" typeahead-on-select="setActivityId($item)"  typeahead="activity.name for activity in activities | filter:$viewValue" placeholder="Indiquer l'activité">
-      <span class="help-block"></span>
-    </div>
-
-
-    <!-- REF3 NAME -->
-    <div id="parent-group" class="form-group">
-      <label>Axe</label>
-      <input type="text" name="refAxe" class="form-control" ng-model="axe" typeahead-on-select="setAxeId($item)"  typeahead="axe.name for axe in axes | filter:$viewValue" placeholder="Indiquer l'axe">
-      <span class="help-block"></span>
-    </div>
-
-
-    <div class="row">
-      <div class="col-md-8">  <h4>Actions</h4>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios1" value="list" checked>
-            Liste les mesures répondant aux critères
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios2" value="count">
-            Compte le nombre de mesures répondant aux critères
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios3" value="mean">
-            Moyenne les mesures répondant aux critères
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios4" value="sum">
-            Somme les mesures répondant aux critères
-          </label>
-        </div>
-      </div>
-      <div class="col-md-4">  <h4>Valeur</h4>
-        <select ng-model="formData.type"  class="form-control">
-          <option value="Charge">Charge</option>
-          <option value="duration">Délai</option>
-          <option>Avancement</option>
-          <option>Début</option>
-          <option>Fin</option>
-        </select>
-        <h4>Référence</h4>
-        <select ng-model="formData.reftype"  class="form-control">
-          <option>Charge</option>
-          <option>Délai</option>
-          <option>Avancement</option>
-          <option>Début</option>
-          <option>Fin</option>
-        </select>
-      </div>
-    </div>
-
-
-    <!-- date -->
-    <div class="row">
-      <div class="col-md-8">  <h4>Filtrer par</h4>
-        <input type="text" name="filter" class="form-control" ng-model="formData.filter" placeholder="Indiquer le filtre">
-        <span class="help-block"></span>
-      </div>
-      <div class="col-md-4">  <h4>Grouper par</h4>
-        <select ng-model="formData.groupBy"  class="form-control">
-          <option>Jour</option>
-          <option>Semaine</option>
-          <option>Mois</option>
-          <option>Trimestre</option>
-          <option>Année</option>
-        </select>
-      </div>
-    </div>
-
-
-    SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED 
-    <pre>
-      {{ formData }}
-    </pre>
-
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-default" ng-click="cancel()">Annuler</button>
-    <button class="btn btn-success" ng-click="ok()">Mise à jour</button>
-  </div>
-
-</script>
-
-<!-- Layout Part -->
-
-
 <div class="stretch col-md-4" id="home">
   <h2>Vos actions à réaliser</h2>
 
@@ -120,7 +5,7 @@
 <div class="stretch col-md-8" id="home">
   <h2>Vos dashboards</h2>
 
-  <div class="stretch col-md-6" id="home">
+  <div class="stretch col-md-6" id="home" ng-repeat="dashboard in dashboards track by dashboard._id">
     <section class="tile transparent">
 
       <!-- tile header -->
@@ -143,8 +28,8 @@
          </span>
 
          <div class="media-body">
-          <h4 class="media-heading"><strong>Priorités stratégiques DCLIC</strong></h4>
-          <small><a href="/dash">Voir en détail</a></small>
+          <h4 class="media-heading"><strong>{{dashboard.name}}</strong></h4>
+          <small><a href="#0" ng-click="openDashboard(dashboard)">Voir en détail</a></small>
         </div>
       </div>
 
@@ -175,65 +60,6 @@
     <!-- /tile body -->
   </section>
 </div>
-<div class="stretch col-md-6" id="home">
-    <section class="tile transparent" >
-
-      <!-- tile header -->
-      <div class="tile-header nopadding">               
-        <div class="controls">
-          <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
-          <a href="#" class="remove"><i class="fa fa-times"></i></a>
-        </div>
-      </div>
-      <!-- /tile header -->
-
-      <!-- tile widget -->
-      <div class="tile-widget color cyan rounded-top-corners">
-
-        <div class="fa fa-twitter watermark"></div>
-        
-        <div class="media social-feed">        
-          <span class="pull-left">
-           <div class="icon icon-ic_center_focus_strong_black_24dp"></div>
-         </span>
-
-         <div class="media-body">
-          <h4 class="media-heading"><strong>Pilotage DECID</strong></h4>
-          <small><a href="/dash">Voir en détail</a></small>
-        </div>
-      </div>
-
-    </div>
-    <!-- /tile widget -->
-
-    <!-- tile body -->
-    <div class="tile-body color transparent-black rounded-bottom-corners">
-      <ul class="inline divided">
-        <li>
-          <h4>0 / 9</h4>
-          Alertes
-        </li>
-        <li>
-          <h4>2 %</h4>
-          Objectifs
-        </li>
-        <li>
-          <h4>0</h4>
-          Anticipation
-        </li>
-        <li>
-          <h4>6</h4>
-          Infos
-        </li>
-      </ul>
-    </div>
-    <!-- /tile body -->
-  </section>
-</div>
-<div class="gridbutton">
-  <button class="btn btn-default" ng-click="openIndicateur({})">Ajouter un dashboard</button>
-</div>
-
 
 </div>    
 

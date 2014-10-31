@@ -74,10 +74,12 @@ $scope.LoadWidgets = function(){
 			even = _.where($rootScope.axes, {id: rowdata.refAxe});
 			rowdata.Axe = even[0].name;
 
-			if (rowdata.Activity.indexOf($rootScope.perimeter.Activity) <0) { 
-				// a ne pas sélectionner
-				$scope.widgets[index].toDisplay = false;
-			} else {
+			var blnContexte = (typeof $rootScope.perimeter.Contexte == "undefined" || rowdata.Contexte.indexOf($rootScope.perimeter.Contexte) >=0 ) ? true : false;
+			var blnActivity = (typeof $rootScope.perimeter.Activity == "undefined" || rowdata.Activity.indexOf($rootScope.perimeter.Activity) >=0 ) ? true : false;
+			var blnAxe = (typeof $rootScope.perimeter.Axe == "undefined" || rowdata.Axe.indexOf($rootScope.perimeter.Axe) >=0 ) ? true : false;
+
+			if (blnContexte && blnActivity && blnAxe) { 
+
 				// on va plus loin en allant chercher les mesures 
 				$scope.widgets[index].toDisplay = true;
 				$http.get('/REST/mesures/bytask/'+rowdata.refContexte+'/'+rowdata.refActivity).success(function (mesures) {
@@ -150,6 +152,11 @@ $scope.LoadWidgets = function(){
 					}
 					$scope.widgets[index].percentObjectif = ($scope.widgets[index].mesureVal /  $scope.widgets[index].reference) * 100 +'%';
 				});
+			} else {
+				// a ne pas sélectionner
+				$scope.widgets[index].toDisplay = false;
+
+
 			}
 
 			//console.log($scope.widgets);

@@ -91,26 +91,31 @@ angular.module('clinBoardApp')
    .controller('rightMenuCtrl', function ($rootScope, $scope, $http, $q) {
 
 
-var deferred = $q.defer();
-var promise = $q.all([
-  $http.get('/REST/activities').success(function (data) {
-      $rootScope.activities = data;
-    }), 
-  $http.get('/REST/axes').success(function (data) {
-      $rootScope.axes = data;
-    }),
-  $http.get('/REST/contextes').success(function (data) {
-      $rootScope.contextes = data;
-    })]);
 
-promise.then(function () {
-      $rootScope.perimeter = {refContexte:'',refActivity:'MzLk4bjhKbDIp8Ka',refAxe:'',category:[],time:''};
+  var deferred = $q.defer();
+  var promise = $q.all([
+    $http.get('/REST/activities').success(function (data) {
+        $rootScope.activities = data;
+      }), 
+    $http.get('/REST/axes').success(function (data) {
+        $rootScope.axes = data;
+      }),
+    $http.get('/REST/contextes').success(function (data) {
+        $rootScope.contextes = data;
+      })]);
+
+  promise.then(function () {
+      $rootScope.perimeter = {refContexte:'',refActivity:'',refAxe:'',category:[true, true, true, true],time:''};
+    $scope.updateRef();
+  });
+
+  $scope.updateRef = function(){
       // decoder le contexte et les activités pour les mesures
-        var even = _.where($rootScope.contextes, {id: $rootScope.perimeter.refcontexte});
-        if (even.length > 0 ) {$rootScope.perimeter.Contexte = even[0].name};
-        var even = _.where($rootScope.activities, {id: $rootScope.perimeter.refActivity});
-        $rootScope.perimeter.Activity = even[0].name;
-});
+      var even = _.where($rootScope.contextes, {id: $rootScope.perimeter.refcontexte});
+      if (even.length > 0 ) {$rootScope.perimeter.Contexte = even[0].name};
+      var even = _.where($rootScope.activities, {id: $rootScope.perimeter.refActivity});
+      $rootScope.perimeter.Activity = even[0].name;
+  }
 
   $scope.setContextId = function(parent) {
     $scope.perimeter.refContexte = parent.id;
@@ -125,19 +130,18 @@ promise.then(function () {
   };
 
   $scope.updatePerimeter = function() {
-      $rootScope.$broadcast('perimeterChanged','');
+    $rootScope.$broadcast('perimeterChanged','');
 
-  if ($scope.perimeter._id) {
-    $http.put('/REST/dashboard/'+$scope.perimeter._id, $scope.perimeter)
-    .success(function(data) {
-    });
-  }else{
-    $http.post('/REST/dashboard', $scope.perimeter)
-    .success(function(data) {
-    });
-  }
+    if ($scope.perimeter._id) {
+      $http.put('/REST/dashboards/'+$scope.perimeter._id, $scope.perimeter)
+      .success(function(data) {
+      });
+    }else{
+      $http.post('/REST/dashboards', $scope.perimeter)
+      .success(function(data) {
+      });
+    }
 
   };
 
-
-   });
+});

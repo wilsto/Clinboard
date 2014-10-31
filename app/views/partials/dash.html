@@ -10,7 +10,7 @@
             
 
             <h3><span class="glyphicon glyphicon-dashboard"></span> Dashboard
-            <small style="color:grey"> {{dashboard.title}} dashboard.title...</small></h3>
+            <small style="color:grey"> {{perimeter.name}} </small></h3>
           
             <div class="breadcrumbs">
               <ol class="breadcrumb">
@@ -30,7 +30,7 @@
 
           <div class="media">        
             <span class="pull-left" style="margin-right:20px;">
-              <h2><span class="glyphicon glyphicon-record"></span></h2>
+              <h2><span class="glyphicon" ng-class="{'glyphicon-record':widget.category=='Objectif','glyphicon-warning-sign':widget.category=='Alerte'}"></span></h2>
             </span>
 
             <div class="media-body">
