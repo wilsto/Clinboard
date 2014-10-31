@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('clinBoardApp')
-  .controller('indCtrl', function ($rootScope, $scope, $modal, $http, $filter, ngTableParams, $q) {
+  .controller('indCtrl', function ($rootScope, $scope, $modal, $http, $filter, ngTableParams, $q, categoryInd) {
     $scope.Math = window.Math;
 
-
+$scope.categoryInd = categoryInd;
 $scope.types = [
     {value: 'charge', text: 'Charge'},
     {value: 'délai', text: 'Délai'},

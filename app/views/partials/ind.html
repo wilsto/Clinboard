@@ -13,7 +13,7 @@
                      <img ng-if="ind._type == 1" src="images/Target-20.png">
                  </td>
                  <td data-title="'Name'">
-                    {{ind.name}}<br/>
+                    <span editable-text="ind.name" onbeforesave="updateInd('name', $data)">{{ind.name}}</span><br/>
                     <span class="leger">{{ind.Activity}} > {{ind.Contexte}} > {{ind.Axe}} </span>
                 </td>
                 <td data-title="'Mesure'" sortable="mesureVal">
@@ -47,7 +47,7 @@
               <td colspan="8">
                     <div class="strecth  col-md-10">
                         <div id="info"  ng-show="tabactive=='info'">
-                            Cet indicateur est de type <span class="focusValue">Objectif</span>  <br/><br/>
+                            Cet indicateur est de type <span editable-select="indDetail.category" onbeforesave="updateInd('category',$data)" e-ng-options="s.name as s.name for s in categoryInd">{{indDetail.category || 'vide'}}</span>  <br/><br/>
                             Il réalise un calcul sur chaque mesure <span editable-select="indDetail.type" onbeforesave="updateInd('type',$data)" e-ng-options="s.value as s.text for s in types">{{indDetail.type}}</span> comprise dans le périmètre suivant :<br/>
                             <ul>
                                 <li>Contexte : <span class="focusValue">{{indDetail.Contexte}}.*</span> </li>

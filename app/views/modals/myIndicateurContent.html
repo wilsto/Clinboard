@@ -33,79 +33,17 @@
       <span class="help-block"></span>
     </div>
 
-
-    <div class="row">
-      <div class="col-md-8">  <h4>Actions</h4>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios1" value="list" checked>
-            Liste les mesures répondant aux critères
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios2" value="count">
-            Compte le nombre de mesures répondant aux critères
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios3" value="mean">
-            Moyenne les mesures répondant aux critères
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="formData.action" name="optionsRadios" id="optionsRadios4" value="sum">
-            Somme les mesures répondant aux critères
-          </label>
-        </div>
-      </div>
-      <div class="col-md-4">  <h4>Valeur</h4>
-        <select ng-model="formData.type"  class="form-control">
-          <option value="Charge">Charge</option>
-          <option value="duration">Délai</option>
-          <option>Avancement</option>
-          <option>Début</option>
-          <option>Fin</option>
-        </select>
-      <h4>Référence</h4>
-        <select ng-model="formData.reftype"  class="form-control">
-          <option>Charge</option>
-          <option>Délai</option>
-          <option>Avancement</option>
-          <option>Début</option>
-          <option>Fin</option>
-        </select>
-      </div>
-    </div>
-
-
-    <!-- date -->
-    <div class="row">
-      <div class="col-md-8">  <h4>Filtrer par</h4>
-        <input type="text" name="filter" class="form-control" ng-model="formData.filter" placeholder="Indiquer le filtre">
-        <span class="help-block"></span>
-      </div>
-      <div class="col-md-4">  <h4>Grouper par</h4>
-        <select ng-model="formData.groupBy"  class="form-control">
-          <option>Jour</option>
-          <option>Semaine</option>
-          <option>Mois</option>
-          <option>Trimestre</option>
-          <option>Année</option>
-        </select>
-      </div>
-    </div>
-
-
+    <div ng-show="debug==true">
     SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED 
     <pre>
       {{ formData }}
     </pre>
-
+    </div>
   </div>
   <div class="modal-footer">
+      <div style="float:left"><button class="btn btn-alert" ng-click="debug=!debug">Debug Mode</button></div>
+    <div style="float:right">
     <button class="btn btn-default" ng-click="cancel()">Annuler</button>
     <button class="btn btn-success" ng-click="ok()">Mise à jour</button>
+    </div>
   </div>

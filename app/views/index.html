@@ -3,34 +3,34 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head> 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <base href="/">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(app) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
-    <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
-    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/gridster.css">
+<head> 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="/">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(app) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
+  <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
+  <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/gridster.css">
 
   <!--  CUSTOM -->
   <link rel="stylesheet" href="styles/ClinBoard.css" type="text/css"/>
   <link rel="stylesheet" href="styles/style.css" type="text/css"/>
 
-<!--  JQUERY -->
+  <!--  JQUERY -->
   <link rel="stylesheet" href="styles/jquery-ui-1.9.2.custom.min.css" type="text/css"/> 
 
-<!--  SLICK GRID-->
+  <!--  SLICK GRID-->
   <link rel="stylesheet" href="styles/slickGrid/slick.grid.css" type="text/css"/>
   <link rel="stylesheet" href="styles/slickGrid/slick.pager.css" type="text/css"/>  
   <link rel="stylesheet" href="styles/slickGrid/slick.columnpicker.css" type="text/css"/>
@@ -50,55 +50,114 @@
   <link rel="stylesheet" href="bower_components/ng-table/ng-table.css"/>
 
   <link href="bower_components/material-design-icons/sprites/css-sprite/sprite-image-black.css" rel="stylesheet">
-    <!-- endbuild -->
+  <!-- endbuild -->
 
-  </head>
-  <body ng-app="clinBoardApp">
+</head>
+<body ng-app="clinBoardApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+      <![endif]-->
 
 
 
       <div ng-include="'partials/subnav'"></div>
 
 
-    <!-- Add your site or application content here -->
-    <div class="container-fluid" ng-view=""></div>
+      <!-- Add your site or application content here -->
+      <div class="container-fluid" ng-view=""></div>
 
-  <div class="cd-panel from-right">
-    <header class="cd-panel-header">
-      <h1>Modification du périmètre de supervision</h1>
-      <a href="#0" class="cd-panel-close">Fermer</a>
-    </header>
 
-    <div class="cd-panel-container">
-      <div class="cd-panel-content">
-    <!-- REF1 NAME -->
-    <div id="parent-group" class="form-group">
-      <label>Contexte</label>
-      <input type="text" name="contexte" class="form-control" ng-model="contexte" typeahead-on-select="setContextId($item)"  typeahead="contexte.name for contexte in contextes | filter:$viewValue" placeholder="Indiquer le contexte">
-      <span class="help-block"></span>
+      <!-- Right Menu here -->
+      <div id="rightmenu" ng-controller="rightMenuCtrl">
+        <div class="cd-panel from-right">
+          <header class="cd-panel-header">
+            <h1>Modification du périmètre de supervision</h1>
+            <a href="#0" class="cd-panel-close">Fermer</a>
+          </header>
+
+          <div class="cd-panel-container">
+            <div class="cd-panel-content">
+
+
+
+              <!-- REF1 NAME -->
+              <div id="parent-group" class="form-group">
+                <label>Contexte</label>
+                <input type="text" name="contexte" class="form-control" ng-model="perimeter.Contexte" typeahead-on-select="setContextId($item)"  typeahead="contexte.name for contexte in contextes | filter:$viewValue" placeholder="Indiquer le contexte">
+                <span class="help-block"></span>
+              </div>
+
+              <!-- REF2 NAME -->
+              <div id="parent-group" class="form-group">
+                <label>Activité</label>
+                <input type="text" name="refActivity" class="form-control" ng-model="perimeter.Activity" typeahead-on-select="setActivityId($item)"  typeahead="activity.name for activity in activities | filter:$viewValue" placeholder="Indiquer l'activité">
+                <span class="help-block"></span>
+              </div>
+
+
+              <!-- REF3 NAME -->
+              <div id="parent-group" class="form-group">
+                <label>Axe</label>
+                <input type="text" name="refAxe" class="form-control" ng-model="perimeter.Axe" typeahead-on-select="setAxeId($item)"  typeahead="axe.name for axe in axes | filter:$viewValue" placeholder="Indiquer l'axe">
+                <span class="help-block"></span>
+              </div>
+
+              <!-- REF3 NAME -->
+              <div id="parent-group" class="form-group">
+                <label>Catégorie</label>
+                <input type="text" name="status" class="form-control" ng-model="perimeter.category" typeahead-on-select="$item"  typeahead="statut.name for statut in taskStatus" placeholder="Entrer le statut">
+                <span class="help-block">
+                </span>
+              </div>
+
+          <label>Catégories</label>
+    <div id="parent-group" class="form-group form-inline">  
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model='perimeter.category[0]' value="Objectif" checked> Objectif
+            </label>
+          </div>
+           <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model='perimeter.category[1]' value="Alerte" checked> Alerte
+            </label>
+          </div>
+           <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model='perimeter.category[2]' value="Anticipation" checked> Anticipation
+            </label>
+          </div>
+           <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model='perimeter.category[3]' value="Information" checked> Information
+            </label>
+          </div>
+      </div>
+
+<hr/>
+              <!-- REF1 NAME -->
+              <div id="parent-group" class="form-group">
+                <label>Nom </label>
+                <input type="text" name="name" class="form-control" ng-model="perimeter.name" placeholder="Indiquer le nom du dashboard">
+                <span class="help-block"></span>
+              </div>
+
+    <div ng-show="debug==true">
+    SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED 
+    <pre>
+      {{ perimeter }}
+    </pre>
     </div>
-
-    <!-- REF2 NAME -->
-    <div id="parent-group" class="form-group">
-      <label>Activité</label>
-      <input type="text" name="refActivity" class="form-control" ng-model="activity" typeahead-on-select="setActivityId($item)"  typeahead="activity.name for activity in activities | filter:$viewValue" placeholder="Indiquer l'activité">
-      <span class="help-block"></span>
+     <div class="modal-footer">
+      <div style="float:left"><button class="btn btn-alert" ng-click="debug=!debug">Debug Mode</button></div>
+    <div style="float:right">
+    <button class="btn btn-success" ng-click="updatePerimeter()">Mise à jour</button>
     </div>
-
-
-    <!-- REF3 NAME -->
-    <div id="parent-group" class="form-group">
-      <label>Axe</label>
-      <input type="text" name="refAxe" class="form-control" ng-model="axe" typeahead-on-select="setAxeId($item)"  typeahead="axe.name for axe in axes | filter:$viewValue" placeholder="Indiquer l'axe">
-      <span class="help-block"></span>
-    </div>
-
-      </div> <!-- cd-panel-content -->
-    </div> <!-- cd-panel-container -->
-  </div>
+            </div> <!-- cd-panel-content -->
+          </div> <!-- cd-panel-container -->
+        </div>
+      </div>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -128,24 +187,24 @@
 
 
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-            <script type="text/javascript" src="_custom/i18n/angular-locale_fr-fr.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script type="text/javascript" src="_custom/i18n/angular-locale_fr-fr.js"></script>
     <script type="text/javascript" src="_custom/angular/angular-animate.js"></script>
     <script type="text/javascript" src="_custom/angular/angular-dialogs.min.js"></script>
     <script type="text/javascript" src="_custom/angular/angular-round-progress-directive.js"></script>
     <script type="text/javascript" src="_custom/gridster/gridster.js"></script>
     <script type="text/javascript" src="_custom/angular/ng-grid-2.0.7.min.js"></script>
     
-        <script src="scripts/app.js"></script>
-        <script src="scripts/services/service.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/dash.js"></script>
-        <script src="scripts/controllers/ind.js"></script>
-        <script src="scripts/controllers/mesures.js"></script>
-        <script src="scripts/controllers/decid.js"></script>
-        <script src="scripts/controllers/config.js"></script>
-        <script src="scripts/controllers/navbar.js"></script>
-        <!-- endbuild -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services/service.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/dash.js"></script>
+    <script src="scripts/controllers/ind.js"></script>
+    <script src="scripts/controllers/mesures.js"></script>
+    <script src="scripts/controllers/decid.js"></script>
+    <script src="scripts/controllers/config.js"></script>
+    <script src="scripts/controllers/navbar.js"></script>
+    <!-- endbuild -->
 
-</body>
-</html>
+  </body>
+  </html>

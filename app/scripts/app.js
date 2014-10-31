@@ -78,3 +78,66 @@ app.constant('taskStatus',
   {name: 'Finished'}
 ]);
 
+
+app.constant('categoryInd',
+[                                                                                                                                                                                                             
+  {name: 'Objectif'},                                                                                                                                                                                                                         
+  {name: 'Alerte'},                                                                                                                                                                                                                         
+  {name: 'Anticpation'},
+  {name: 'Information'}
+]);
+
+angular.module('clinBoardApp')
+   .controller('rightMenuCtrl', function ($rootScope, $scope, $http, $q) {
+
+
+var deferred = $q.defer();
+var promise = $q.all([
+  $http.get('/REST/activities').success(function (data) {
+      $rootScope.activities = data;
+    }), 
+  $http.get('/REST/axes').success(function (data) {
+      $rootScope.axes = data;
+    }),
+  $http.get('/REST/contextes').success(function (data) {
+      $rootScope.contextes = data;
+    })]);
+
+promise.then(function () {
+      $rootScope.perimeter = {refContexte:'',refActivity:'MzLk4bjhKbDIp8Ka',refAxe:'',category:[],time:''};
+      // decoder le contexte et les activités pour les mesures
+        var even = _.where($rootScope.contextes, {id: $rootScope.perimeter.refcontexte});
+        if (even.length > 0 ) {$rootScope.perimeter.Contexte = even[0].name};
+        var even = _.where($rootScope.activities, {id: $rootScope.perimeter.refActivity});
+        $rootScope.perimeter.Activity = even[0].name;
+});
+
+  $scope.setContextId = function(parent) {
+    $scope.perimeter.refContexte = parent.id;
+  };
+
+  $scope.setActivityId = function(parent) {
+    $scope.perimeter.refActivity = parent.id;
+  };
+
+  $scope.setAxeId = function(parent) {
+    $scope.perimeter.refAxe = parent.id;
+  };
+
+  $scope.updatePerimeter = function() {
+      $rootScope.$broadcast('perimeterChanged','');
+
+  if ($scope.perimeter._id) {
+    $http.put('/REST/dashboard/'+$scope.perimeter._id, $scope.perimeter)
+    .success(function(data) {
+    });
+  }else{
+    $http.post('/REST/dashboard', $scope.perimeter)
+    .success(function(data) {
+    });
+  }
+
+  };
+
+
+   });
