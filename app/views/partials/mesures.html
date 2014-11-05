@@ -185,7 +185,7 @@
 				</div>
 
 				<div class="pull-right col-sm-2">
-					<span class="leger">{{tache.Mesures[tache.Mesures.length-1].startDate | date:'shortDate'}}</span><progressbar value="tache.Mesures[tache.Mesures.length-1].avancement" type="success"><b>{{tache.Mesures[tache.Mesures.length-1].avancement}}%</b></progressbar>
+					<span class="leger">{{tache.Mesures[tache.Mesures.length-1].startDate | date:'shortDate'}}</span><progressbar value="tache.Mesures[tache.Mesures.length-1].avancement" type="primary"><b>{{tache.Mesures[tache.Mesures.length-1].avancement}}%</b></progressbar>
 					<span class="pull-right leger"> {{tache.Mesures[tache.Mesures.length-1].endDate | date:'shortDate'}}</span>
 				</div>
 				<div class="pull-right col-sm-1">
@@ -222,8 +222,8 @@
 				<tbody>
 					<tr ng-repeat="mesure in mesures | filter:search | orderBy:'date'" ng-show="mesure._id">
 						<td>{{mesure.date | date:'shortDate'}}</td>
-						<td>{{mesure.Activity}}</td>
-						<td>{{mesure.Contexte}}</td>
+						<td>{{mesure.Activity.replace(tache.Activity.name,"#")}}</td>
+						<td>{{mesure.Contexte.replace(tache.Contexte.name,"#")}}</td>
 						<td>{{mesure.startDate | date:'shortDate'}}</td>
 						<td>{{mesure.charge}}</td>
 						<td>{{mesure.status}}</td>

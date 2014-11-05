@@ -14,9 +14,9 @@
     "underscore": "~1.6.0",
     "angular-bootstrap": "~0.10.0",
     "jquery-ui": "~1.10.4",
-    "d3": "~3.4.4",
+    "d3": "~3.4.13",
     "nvd3": "~1.1.15-beta",
-    "angularjs-nvd3-directives": "~0.0.5-beta",
+    "angularjs-nvd3-directives": "~0.0.7",
     "ng-table": "~0.3.1",
     "angular-xeditable": "~0.1.8"
   },

@@ -106,7 +106,7 @@ angular.module('clinBoardApp')
 
   promise.then(function () {
       $rootScope.perimeter = {refContexte:'',refActivity:'',refAxe:'',category:[true, true, true, true],time:''};
-    $scope.updateRef();
+      $scope.updateRef();
   });
 
   $scope.updateRef = function(){
@@ -129,17 +129,24 @@ angular.module('clinBoardApp')
     $scope.perimeter.refAxe = parent.id;
   };
 
-  $scope.updatePerimeter = function() {
+  $scope.updatePerimeter = function(blnSave) {
     $rootScope.$broadcast('perimeterChanged','');
 
-    if ($scope.perimeter._id) {
-      $http.put('/REST/dashboards/'+$scope.perimeter._id, $scope.perimeter)
-      .success(function(data) {
-      });
-    }else{
-      $http.post('/REST/dashboards', $scope.perimeter)
-      .success(function(data) {
-      });
+    // sauvegarder si demandé
+    if (blnSave) {
+        if ($scope.perimeter._id) {
+          $http.put('/REST/dashboards/'+$scope.perimeter._id, $scope.perimeter)
+          .success(function(data) {
+          });
+        }else{
+          $http.post('/REST/dashboards', $scope.perimeter)
+          .success(function(data) {
+          });
+        }
+    }
+    else {
+      $scope.perimeter._id = null;
+      $scope.perimeter.name = 'Custom (not saved)';
     }
 
   };

@@ -8,18 +8,6 @@ angular.module('clinBoardApp')
   $rootScope.taskStatus = taskStatus;
   $rootScope.progressStatus = progressStatus;
 
-  $http.get('/REST/activities').success(function (data) {
-    $rootScope.activities = data;
-  });
-
-  $http.get('/REST/axes').success(function (data) {
-    $rootScope.axes = data;
-  });
-
-  $http.get('/REST/contextes').success(function (data) {
-    $rootScope.contextes = data;
-  });
-
   $scope.options = {
     widget_margins: [10, 10],
     widget_base_dimensions: [140, 140],

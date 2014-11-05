@@ -1,10 +1,5 @@
-{"refContexte":"","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[],"time":"","Activity":"DCLIC.CBI.TREND","name":"Priorités stratégiques CBI","_id":"5NUYPhtQVPAqEzwZ"}
-{"refContexte":"","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[],"time":"","Activity":"DCLIC.CBI.TREND","name":"Suivi Production","_id":"LPd3KHMLch3YzkZs"}
-{"refContexte":"","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[],"time":"","Activity":"DCLIC.CBI.TREND","name":"Pilotage Projets structurants","_id":"YcDFJZbmmsbarblq"}
-{"refContexte":"","refActivity":"m8rYxhWmfSeQAJkk","refAxe":"","category":[true,true,true,true],"time":"","Activity":"DCLIC.CBI.TREND.CeDeX","name":"Pilotage Cedex","_id":"YrHTYBGF1l53PB2D"}
-{"refContexte":"","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[],"time":"","Activity":"DCLIC.CBI.TREND","name":"Pilotage DECID","_id":"z8QEXf3OHCa3LGE7"}
-{"refContexte":"ELqLmfOPFiDy9tmz","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[true,true,true,true],"time":"","_id":"YcDFJZbmmsbarblq","name":"Pilotage Projets structurants","Activity":"DCLIC.CBI","Contexte":"Projet"}
 {"refContexte":"","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[true,false,false,false],"time":"","_id":"5NUYPhtQVPAqEzwZ","name":"Priorités stratégiques CBI","Activity":"DCLIC.CBI"}
-{"refContexte":"jucwk0A2HeFX60x5","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[true,true,true,true],"time":"","_id":"LPd3KHMLch3YzkZs","name":"Suivi Production","Activity":"DCLIC.CBI","Contexte":"Production"}
+{"refContexte":"jucwk0A2HeFX60x5","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[true,true,false,false],"time":"","_id":"LPd3KHMLch3YzkZs","name":"Suivi Production","Activity":"DCLIC.CBI","Contexte":"Production"}
+{"refContexte":"ELqLmfOPFiDy9tmz","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[true,true,true,true],"time":"","_id":"YcDFJZbmmsbarblq","name":"Pilotage Projets","Activity":"DCLIC.CBI","Contexte":"Projet"}
+{"refContexte":"","refActivity":"m8rYxhWmfSeQAJkk","refAxe":"","category":[true,true,true,true],"time":"","_id":"YrHTYBGF1l53PB2D","name":"Pilotage Cedex","Activity":"DCLIC.CBI.TREND.CeDeX"}
 {"refContexte":"bHwkJxYTGPNuAFor","refActivity":"MzLk4bjhKbDIp8Ka","refAxe":"","category":[true,true,true,true],"time":"","_id":"z8QEXf3OHCa3LGE7","name":"Pilotage DECID","Activity":"","Contexte":"Projet.HIP"}
-{"refContexte":"","refActivity":"vRXTKWpGsRQPICDi","refAxe":"","category":[true,true,true,true],"time":"","_id":"YrHTYBGF1l53PB2D","name":"Pilotage Cedex","Activity":"DCLIC.CBI.TREND.Analysis Datasets"}

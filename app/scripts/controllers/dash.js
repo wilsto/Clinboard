@@ -60,6 +60,14 @@ angular.module('clinBoardApp')
 * Retrieve data
 */
 
+$scope.exampleData =  {
+         "title": "Revenue",
+         "subtitle": "US$, in thousands",
+         "ranges": [40, 80, 100],
+         "measures": [76],
+         "markers": [80]
+     };
+
 $scope.LoadWidgets = function(){
    	$http.get('/REST/indicateurs').success(function (data) {
 
@@ -77,8 +85,9 @@ $scope.LoadWidgets = function(){
 			var blnContexte = (typeof $rootScope.perimeter.Contexte == "undefined" || rowdata.Contexte.indexOf($rootScope.perimeter.Contexte) >=0 ) ? true : false;
 			var blnActivity = (typeof $rootScope.perimeter.Activity == "undefined" || rowdata.Activity.indexOf($rootScope.perimeter.Activity) >=0 ) ? true : false;
 			var blnAxe = (typeof $rootScope.perimeter.Axe == "undefined" || rowdata.Axe.indexOf($rootScope.perimeter.Axe) >=0 ) ? true : false;
+			var blnCategory = ($rootScope.perimeter.category[0] == true && rowdata.category == 'Objectif' || $rootScope.perimeter.category[1] == true && rowdata.category == 'Alerte') ? true : false;
 
-			if (blnContexte && blnActivity && blnAxe) { 
+			if (blnContexte && blnActivity && blnAxe && blnCategory) { 
 
 				// on va plus loin en allant chercher les mesures 
 				$scope.widgets[index].toDisplay = true;

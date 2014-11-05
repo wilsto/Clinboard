@@ -52,6 +52,12 @@
   <link href="bower_components/material-design-icons/sprites/css-sprite/sprite-image-black.css" rel="stylesheet">
   <!-- endbuild -->
 
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/nvd3/nv.d3.js"></script>
+<script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
+<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css"/>
+
 </head>
 <body ng-app="clinBoardApp">
     <!--[if lt IE 7]>
@@ -135,7 +141,13 @@
                 <span class="help-block">
                 </span>
               </div>
+
+    <div style="float:right">
+    <button class="btn btn-primary" ng-click="updatePerimeter(false)">Appliquer sans sauvegarder</button>
+    </div>
+<br/><br/>
 <hr/>
+<br/>
               <!-- REF1 NAME -->
               <div id="parent-group" class="form-group">
                 <label>Nom </label>
@@ -152,7 +164,7 @@
      <div class="modal-footer">
       <div style="float:left"><button class="btn btn-alert" ng-click="debug=!debug">Debug Mode</button></div>
     <div style="float:right">
-    <button class="btn btn-success" ng-click="updatePerimeter()">Mise à jour</button>
+    <button class="btn btn-success" ng-click="updatePerimeter(true)">Enregistrer</button>
     </div>
             </div> <!-- cd-panel-content -->
           </div> <!-- cd-panel-container -->
@@ -166,7 +178,6 @@
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -175,10 +186,6 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
-    <script src="bower_components/d3/d3.js"></script>
-    <script src="bower_components/nvd3/nv.d3.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
     <script src="bower_components/ng-table/ng-table.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <!-- endbower -->
