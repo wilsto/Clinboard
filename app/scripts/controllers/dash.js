@@ -60,14 +60,6 @@ angular.module('clinBoardApp')
 * Retrieve data
 */
 
-$scope.exampleData =  {
-         "title": "Revenue",
-         "subtitle": "US$, in thousands",
-         "ranges": [40, 80, 100],
-         "measures": [76],
-         "markers": [80]
-     };
-
 $scope.LoadWidgets = function(){
    	$http.get('/REST/indicateurs').success(function (data) {
 

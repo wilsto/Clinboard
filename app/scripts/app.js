@@ -8,11 +8,8 @@ var app = angular.module('clinBoardApp', [
   'ngAnimate',
   'ui.bootstrap',
   'dialogs',
-  'ngGrid',
   'angular.directives-round-progress',
   'nvd3ChartDirectives',
-  'ngTable',
-  'gridster',
   'xeditable'
 ]);
 
@@ -34,6 +31,54 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/mesures',
         controller: 'mesuresCtrl'
       })
+      .when('/tasks', {
+        templateUrl: 'partials/tasks',
+        controller: 'tasksCtrl',
+        resolve: {
+          activities: function(srvLibrary) {
+            return srvLibrary.getActivities();
+          },
+          contextes: function(srvLibrary) {
+            return srvLibrary.getContextes();
+          },
+          axes: function(srvLibrary) {
+            return srvLibrary.getAxes();
+          },
+          tasks: function(srvLibrary) {
+            return srvLibrary.getTasks();
+          }
+        }
+      }) 
+      .when('/task/:taskId', {
+        templateUrl: 'partials/task',
+        controller: 'taskCtrl',
+        resolve: {
+          activities: function(srvLibrary) {
+            return srvLibrary.getActivities();
+          },
+          contextes: function(srvLibrary) {
+            return srvLibrary.getContextes();
+          },
+          axes: function(srvLibrary) {
+            return srvLibrary.getAxes();
+          }
+        }
+      })  
+      .when('/calendar', {
+        templateUrl: 'partials/calendar',
+        controller: 'calendarCtrl',
+        resolve: {
+          activities: function(srvLibrary) {
+            return srvLibrary.getActivities();
+          },
+          contextes: function(srvLibrary) {
+            return srvLibrary.getContextes();
+          },
+          axes: function(srvLibrary) {
+            return srvLibrary.getAxes();
+          }
+        }
+      })           
       .when('/config', {
         templateUrl: 'partials/config',
         controller: 'configCtrl'
@@ -42,9 +87,7 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/decid',
         controller: 'decidCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
+;
       
     $locationProvider.html5Mode(true);
   });
@@ -91,6 +134,18 @@ angular.module('clinBoardApp')
    .controller('rightMenuCtrl', function ($rootScope, $scope, $http, $q) {
 
 
+app.run(['$rootScope', function($root) {
+  $root.$on('$routeChangeStart', function(e, curr, prev) { 
+    if (curr.$$route && curr.$$route.resolve) {
+      // Show a loading message until promises are not resolved
+      $root.loadingView = true;
+    }
+  });
+  $root.$on('$routeChangeSuccess', function(e, curr, prev) { 
+    // Hide loading message
+    $root.loadingView = false;
+  });
+}]);
 
   var deferred = $q.defer();
   var promise = $q.all([

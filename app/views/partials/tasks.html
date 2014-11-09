@@ -1,0 +1,137 @@
+
+<!--* Modal Part-->
+
+<script type="text/ng-template" id="myModalContent.html">
+	<div class="modal-header">
+		<h3>Ajouter</h3>
+	</div>
+	<div class="modal-body">
+		<!-- FORM -->
+
+		<!-- NAME -->
+		<div id="name-group" class="form-group">
+			<label>Nom</label>
+			<input type="text" name="name" class="form-control"  ng-model="formData.name" placeholder="Entrer le nom">
+			<span class="help-block">
+			</span>
+		</div>
+
+		<!-- REF1 NAME -->
+		<div id="parent-group" class="form-group">
+			<label>Contexte</label>
+			<input type="text" name="contexte" class="form-control" ng-model="contexte" typeahead-on-select="setContextId($item)"  typeahead="contexte.name for contexte in contextes | filter:$viewValue" placeholder="Indiquer le contexte">
+			<span class="help-block">
+			</span>
+		</div>
+
+		<!-- REF2 NAME -->
+		<div id="parent-group" class="form-group">
+			<label>Activité</label>
+			<input type="text" name="refActivity" class="form-control" ng-model="parent" typeahead-on-select="setActivityId($item)"  typeahead="activity.name for activity in activities | filter:$viewValue" placeholder="Indiquer  l'activité">
+			<span class="help-block">
+			</span>
+		</div>
+
+		<pre>
+			{{ formData }}
+		</pre>
+
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="cancel()">Annuler</button>
+		<button class="btn btn-success" ng-click="ok()">Mise à jour</button>
+	</div>
+
+</script>
+
+<!-- Layout Part -->
+<div class="stretch col-md-12" id="home">
+          <div class="portlet tasks-widget">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-check"></i>Tasks
+              </div>
+              <div class="tools">
+                <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                <a href="" class="reload"></a>
+              </div>
+              <div class="actions">
+                <div class="btn-group">
+                  <a class="btn btn-primary btn-sm" href="#" ng-click="open('taches')">
+                  <i class="fa fa-plus"> Create new task </i>
+                  </a>
+                  <a class="btn btn-info btn-sm dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                   Filter <i class="fa fa-angle-down"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right">
+                    <li>
+                      <a href="#">Pending <span class="badge badge-warning">
+                      4 </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Completed <span class="badge badge-success">
+                      12 </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Overdue <span class="badge badge-important">
+                      9 </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="task-content">
+                <div class="scroller" style="height: 100%;" data-always-visible="1" data-rail-visible1="1">
+                  <!-- START TASK LIST -->
+                  <ul class="task-list">
+                    <li ng-repeat="tache in taches track by $index" on-finish-render>
+                      <div class="task-checkbox">
+                        <input type="checkbox" class="liChild" value=""/>
+                      </div>
+                      <div class="task-title">
+
+                        <span class="task-title-sp"> 
+                        &nbsp;&nbsp;<a href="/task/{{tache._id}}" >{{tache.name}} </a></span>&nbsp;&nbsp;
+                        <span class="label label-sm label-success">
+                        {{tache.Activity.name}} </span>&nbsp;&nbsp;
+                        <span class="label label-sm label-success">
+                        {{tache.Contexte.name}} </span>
+                        <span class="pull-right leger">{{tache.Mesures[tache.Mesures.length-1].startDate | date:'shortDate'}}&nbsp;&nbsp;
+                        <span class="label label-sm" ng-class="{'label-warning':tache.Mesures[tache.Mesures.length-1].status =='In Progress','label-success':tache.Mesures[tache.Mesures.length-1].status =='Finished','label-important':tache.Mesures[tache.Mesures.length-1].status =='Late'}">
+                        {{tache.Mesures[tache.Mesures.length-1].status}} </span>&nbsp;&nbsp;{{tache.Mesures[tache.Mesures.length-1].endDate | date:'shortDate'}}</span>
+                      </div>
+                      <div class="task-config">
+                        <div class="task-config-btn btn-group">
+                          <a class="btn btn-xs btn-default dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                          <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i></a>
+                          <ul class="dropdown-menu pull-right">
+                            <li>
+                              <a href="/task/{{tache._id}}" ><i class="fa fa-check"></i> Complete</a>
+                            </li>
+                            <li>
+                              <a href="#"><i class="fa fa-pencil"></i> Edit</a>
+                            </li>
+                            <li>
+                              <a href="#"><i class="fa fa-trash-o"></i> Cancel</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <!-- END START TASK LIST -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+</div>
+</div>
+
+
+
+
