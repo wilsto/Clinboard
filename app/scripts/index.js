@@ -845,13 +845,19 @@ var Index = function () {
             },
             function (start, end) {
                 console.log("Callback has been called!");
-                $('#dashboard-report-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                $('#dashboard-report-range span').html(start.format('MMM DD YYYY') + ' - ' + end.format('MMM DD YYYY'));
             }
             );
 
 
-            $('#dashboard-report-range span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+            $('#dashboard-report-range span').html(moment().subtract('days', 29).format('MMM DD YYYY') + ' - ' + moment().format('MMM DD YYYY'));
             $('#dashboard-report-range').show();
+        },
+
+        initDashboardSupervision: function () {
+
+            $('#dashboard-report-supervision span').html( 'Supervision' );
+            $('#dashboard-report-supervision').show();
         }
     };
 

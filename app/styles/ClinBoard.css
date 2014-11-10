@@ -772,6 +772,7 @@ h2.media-heading {
   min-height: 80px;
   margin-bottom: 20px; }
   .card-container .card {
+
     height: 200px;
     position: relative;
     -webkit-perspective: 600px;

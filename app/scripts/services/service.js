@@ -11,7 +11,7 @@ angular.module('clinBoardApp').service('profile', function() {
     }
 });
 
-angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope',function($http,$rootScope) {
+angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope', '$q', function($http,$rootScope,$q) {
 	var sdo = {
 		getActivities: function() {
 			var promise = $http.get('/REST/activities').success(function (data) {
@@ -45,6 +45,30 @@ angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope',func
 				return data;
 			});
 			return promise;
+		},
+		getInitData : function() {
+			var deferred = $q.defer();
+			var promise = $q.all([
+				$http.get('/REST/activities').success(function (data) {
+				    $rootScope.activities = data;
+				  }), 
+				$http.get('/REST/axes').success(function (data) {
+				    $rootScope.axes = data;
+				  }),
+				$http.get('/REST/contextes').success(function (data) {
+				    $rootScope.contextes = data;
+				  })
+			]);
+
+			promise.then(function () {
+			  	if (typeof  $rootScope.perimeter == "undefined" ) {$rootScope.perimeter = {refContexte:'',refActivity:'',refAxe:'',category:[true, true, true, true],time:''}};
+				// decoder le contexte et les activités pour les mesures
+				var even = _.where($rootScope.contextes, {id: $rootScope.perimeter.refcontexte});
+				if (even.length > 0 ) {$rootScope.perimeter.Contexte = even[0].name};
+				var even = _.where($rootScope.activities, {id: $rootScope.perimeter.refActivity});
+				if (even.length > 0 ) {$rootScope.perimeter.Activity = even[0].name};
+			});
+
 		}
 	}
 	return sdo;

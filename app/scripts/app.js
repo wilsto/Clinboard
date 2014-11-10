@@ -10,26 +10,47 @@ var app = angular.module('clinBoardApp', [
   'dialogs',
   'angular.directives-round-progress',
   'nvd3ChartDirectives',
-  'xeditable'
+  'xeditable',
+  'mgcrea.ngStrap.popover'
 ]);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        controller: 'MainCtrl'
-      })
-      .when('/dash', {
+        controller: 'MainCtrl',
+        resolve: {
+          initData: function(srvLibrary) {
+            return srvLibrary.getInitData();
+          }
+        }
+      }) 
+      .when('/dash/:dashId', {
         templateUrl: 'partials/dash',
-        controller: 'dashCtrl'
+        controller: 'dashCtrl',
+        resolve: {
+          initData: function(srvLibrary) {
+            return srvLibrary.getInitData();
+          }
+        }
       })
       .when('/ind', {
         templateUrl: 'partials/ind',
-        controller: 'indCtrl'
+        controller: 'indCtrl',
+        resolve: {
+          initData: function(srvLibrary) {
+            return srvLibrary.getInitData();
+          }
+        }
       })
       .when('/mesures', {
         templateUrl: 'partials/mesures',
-        controller: 'mesuresCtrl'
+        controller: 'mesuresCtrl',
+        resolve: {
+          initData: function(srvLibrary) {
+            return srvLibrary.getInitData();
+          }
+        }
       })
       .when('/tasks', {
         templateUrl: 'partials/tasks',
@@ -130,10 +151,6 @@ app.constant('categoryInd',
   {name: 'Information'}
 ]);
 
-angular.module('clinBoardApp')
-   .controller('rightMenuCtrl', function ($rootScope, $scope, $http, $q) {
-
-
 app.run(['$rootScope', function($root) {
   $root.$on('$routeChangeStart', function(e, curr, prev) { 
     if (curr.$$route && curr.$$route.resolve) {
@@ -146,64 +163,3 @@ app.run(['$rootScope', function($root) {
     $root.loadingView = false;
   });
 }]);
-
-  var deferred = $q.defer();
-  var promise = $q.all([
-    $http.get('/REST/activities').success(function (data) {
-        $rootScope.activities = data;
-      }), 
-    $http.get('/REST/axes').success(function (data) {
-        $rootScope.axes = data;
-      }),
-    $http.get('/REST/contextes').success(function (data) {
-        $rootScope.contextes = data;
-      })]);
-
-  promise.then(function () {
-      $rootScope.perimeter = {refContexte:'',refActivity:'',refAxe:'',category:[true, true, true, true],time:''};
-      $scope.updateRef();
-  });
-
-  $scope.updateRef = function(){
-      // decoder le contexte et les activités pour les mesures
-      var even = _.where($rootScope.contextes, {id: $rootScope.perimeter.refcontexte});
-      if (even.length > 0 ) {$rootScope.perimeter.Contexte = even[0].name};
-      var even = _.where($rootScope.activities, {id: $rootScope.perimeter.refActivity});
-      $rootScope.perimeter.Activity = even[0].name;
-  }
-
-  $scope.setContextId = function(parent) {
-    $scope.perimeter.refContexte = parent.id;
-  };
-
-  $scope.setActivityId = function(parent) {
-    $scope.perimeter.refActivity = parent.id;
-  };
-
-  $scope.setAxeId = function(parent) {
-    $scope.perimeter.refAxe = parent.id;
-  };
-
-  $scope.updatePerimeter = function(blnSave) {
-    $rootScope.$broadcast('perimeterChanged','');
-
-    // sauvegarder si demandé
-    if (blnSave) {
-        if ($scope.perimeter._id) {
-          $http.put('/REST/dashboards/'+$scope.perimeter._id, $scope.perimeter)
-          .success(function(data) {
-          });
-        }else{
-          $http.post('/REST/dashboards', $scope.perimeter)
-          .success(function(data) {
-          });
-        }
-    }
-    else {
-      $scope.perimeter._id = null;
-      $scope.perimeter.name = 'Custom (not saved)';
-    }
-
-  };
-
-});
