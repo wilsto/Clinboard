@@ -726,81 +726,83 @@ var Index = function () {
                 $(".stat.bad .line-chart").peity("line", {
                     height: 20,
                     width: 50,
-                    colour: "#d12610",
+                    fill: ["#d12610"],
                     strokeColour: "#666"
                 }).show();
 
                 $(".stat.bad .bar-chart").peity("bar", {
                     height: 20,
                     width: 50,
-                    colour: "#d12610",
+                    fill: ["#d12610"],
                     strokeColour: "#666"
                 }).show();
 
                 $(".stat.ok .line-chart").peity("line", {
                     height: 20,
                     width: 50,
-                    colour: "#37b7f3",
+                    fill: ["#37b7f3"],
                     strokeColour: "#757575"
                 }).show();
 
                 $(".stat.ok .bar-chart").peity("bar", {
                     height: 20,
                     width: 50,
-                    colour: "#37b7f3"
+                    fill: ["#37b7f3"]
                 }).show();
 
                 $(".stat.good .line-chart").peity("line", {
                     height: 20,
                     width: 50,
-                    colour: "#52e136"
+                    fill: ["#52e136"]
                 }).show();
 
                 $(".stat.good .bar-chart").peity("bar", {
                     height: 20,
                     width: 50,
-                    colour: "#52e136"
+                    fill: ["#52e136"]
                 }).show();
                 //
 
                 $(".stat.bad.huge .line-chart").peity("line", {
                     height: 20,
                     width: 40,
-                    colour: "#d12610",
+                    fill: ["#d12610"],
                     strokeColour: "#666"
                 }).show();
 
                 $(".stat.bad.huge .bar-chart").peity("bar", {
                     height: 20,
                     width: 40,
-                    colour: "#d12610",
+                    fill: ["#d12610"],
                     strokeColour: "#666"
                 }).show();
 
                 $(".stat.ok.huge .line-chart").peity("line", {
                     height: 20,
                     width: 40,
-                    colour: "#37b7f3",
+                    fill: ["#37b7f3"],
                     strokeColour: "#757575"
                 }).show();
 
                 $(".stat.ok.huge .bar-chart").peity("bar", {
                     height: 20,
                     width: 40,
-                    colour: "#37b7f3"
+                    fill: ["#37b7f3"]
                 }).show();
 
                 $(".stat.good.huge .line-chart").peity("line", {
                     height: 20,
                     width: 40,
-                    colour: "#52e136"
+                    fill: ["#52e136"]
                 }).show();
 
                 $(".stat.good.huge .bar-chart").peity("bar", {
                     height: 20,
                     width: 40,
-                    colour: "#52e136"
+                    fill: ["#52e136"]
                 }).show();
+
+
         
         },
 

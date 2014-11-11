@@ -1,37 +1,11 @@
 'use strict';
 
 angular.module('clinBoardApp')
-  .controller('tasksCtrl', function($rootScope, $scope, $http, $modal, $dialogs,taskStatus, progressStatus, tasks){
+  .controller('indicatorCtrl', function($rootScope, $scope, $http, $modal, indicators){
 
-  $scope.debug = false;
+   $scope.indicator = indicators.data[0];
 
-  $rootScope.taskStatus = taskStatus;
-  $rootScope.progressStatus = progressStatus;
-
-  $scope.LoadWidgets = function(){
-      $scope.taches = tasks.data;
-
-      // decoder le contexte et les activités pour les taches
-      //Join json
-      _.each(_.keys($scope.taches), function(key) {
-          var even = _.where($rootScope.contextes, {id: $scope.taches[key].refContexte});
-          $scope.taches[key].Contexte = even[0];
-          var even = _.where($rootScope.activities, {id: $scope.taches[key].refActivity});
-          $scope.taches[key].Activity = even[0];
-
-          $http.get('/REST/mesures/bytask/'+$scope.taches[key].refContexte+'/'+$scope.taches[key].refActivity).success(function (mesures) {
-                $scope.taches[key].Mesures = mesures;
-          })
-      });     
-
- }
-
- $scope.LoadWidgets();
-
-$scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
- $scope.$apply();
-});
-
+ 
   /**
    * Modal
    */
@@ -107,10 +81,6 @@ $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
     $scope.activities = $rootScope.activities;
     $scope.contextes = $rootScope.contextes;
 
-    if ($rootScope.newItem === true) { 
-       delete $scope.formData._id;
-    }
-
     $scope.today = function() {
       $scope.date = new Date();
     };
@@ -175,8 +145,7 @@ $scope.setActivityId = function(parent) {
 
 $scope.ok = function () {
   $modalInstance.close();
-
-  if ($scope.formData._id) {
+  if ($rootScope.newItem === false) {
   $http.put('/REST/mesures/'+$scope.formData._id, $scope.formData)
   .success(function(data) {
   });
@@ -196,17 +165,4 @@ $scope.cancel = function () {
   $modalInstance.dismiss('cancel');
 };
 };
-
-
-
-  /**
-   * Displaydetails
-   */
-
-   $scope.DisplayDetails = function (tache) {
-    $scope.mesures = tache.Mesures;
-  };
-
-
-
 });

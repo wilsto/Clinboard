@@ -14,3 +14,8 @@ div.visual div {
 	display:block!important;
 	margin-top:-50px;
 }
+
+
+.bar-chart {
+	display: none!important;
+}

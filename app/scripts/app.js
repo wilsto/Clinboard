@@ -31,16 +31,22 @@ app.config(function ($routeProvider, $locationProvider) {
         resolve: {
           initData: function(srvLibrary) {
             return srvLibrary.getInitData();
+          },
+          dashboards: function(srvLibrary, $route) {
+            return srvLibrary.getDashBoards($route.current.params.dashId);
+          },
+          indicateurs: function(srvLibrary) {
+            return srvLibrary.getIndicateurs();
           }
         }
       })
-      .when('/ind', {
-        templateUrl: 'partials/ind',
-        controller: 'indCtrl',
+      .when('/indicator/:id', {
+        templateUrl: 'partials/indicator',
+        controller: 'indicatorCtrl',
         resolve: {
-          initData: function(srvLibrary) {
-            return srvLibrary.getInitData();
-          }
+          indicators: function(srvLibrary, $route) {
+            return srvLibrary.getIndicateurs($route.current.params.id);
+          },
         }
       })
       .when('/mesures', {

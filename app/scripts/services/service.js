@@ -11,7 +11,7 @@ angular.module('clinBoardApp').service('profile', function() {
     }
 });
 
-angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope', '$q', function($http,$rootScope,$q) {
+angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope', '$q', '$routeParams','$timeout',function($http,$rootScope,$q, $routeParams,$timeout) {
 	var sdo = {
 		getActivities: function() {
 			var promise = $http.get('/REST/activities').success(function (data) {
@@ -32,6 +32,31 @@ angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope', '$q
 				$rootScope.axes = data;
 				return data;
 			});
+			return promise;
+		},
+		getDashBoards: function(dashId) {
+			if (typeof dashId == 'undefined') {
+				var promise = $http.get('/REST/dashboards').success(function (data) { 
+					return data;
+				})
+			} else {
+				var promise = $http.get('/REST/dashboards/'+dashId).success(function (data) { 
+					return data;
+				});
+			}
+
+			return promise;
+		},
+		getIndicateurs: function(id) {
+			if (typeof id == 'undefined') {
+				var promise = $http.get('/REST/indicateurs').success(function (data) { 
+					return data;
+				})
+			} else {
+				var promise = $http.get('/REST/indicateurs/'+id).success(function (data) { 
+					return data;
+				});
+			}
 			return promise;
 		},
 		getTasks: function() {
@@ -75,6 +100,7 @@ angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope', '$q
 }]);
 
 angular.module('clinBoardApp').directive('onFinishRender', function ($timeout) {
+	console.log('yyy');
 	return {
 		restrict: 'A',
 		link: function (scope, element, attr) {

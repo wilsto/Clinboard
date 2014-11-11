@@ -333,12 +333,8 @@ var TableAdvanced = function () {
                 return;
             }
 
-            initTable1();
-            initTable2();
-            initTable3();
+
             initTable4();
-            initTable5();
-            initTable6();
         }
 
     };

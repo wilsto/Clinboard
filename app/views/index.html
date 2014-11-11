@@ -650,7 +650,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height btn-primary" data-container="body" data-placement="top" data-original-title="Change dashboard date range">
 						<i class="icon-calendar"></i>&nbsp; <span class="thin uppercase visible-lg-inline-block"></span>&nbsp; <i class="fa fa-angle-down"></i>
 					</div>
-					<div id="dashboard-report-supervision" class="pull-right tooltips btn btn-fit-height btn-default" data-html="true"  data-content="#{{perimeter.name}}#<br/>
+					<div id="dashboard-report-supervision" class="pull-right tooltips btn btn-fit-height btn-default" data-html="true"  data-content="<br/>
 	<div class='form-group visible-lg-inline-block'>
 		<label class='col-md-2 control-label'>Activity</label>
 		<div class='col-md-7'>
@@ -860,6 +860,11 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 	<script src="plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
 	<script src="plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
     
 
@@ -871,6 +876,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="scripts/controllers/ind.js"></script>
     <script src="scripts/controllers/tasks.js"></script>
     <script src="scripts/controllers/task.js"></script>
+    <script src="scripts/controllers/indicator.js"></script>
     <script src="scripts/controllers/calendar.js"></script>
     <script src="scripts/controllers/mesures.js"></script>
     <script src="scripts/controllers/decid.js"></script>
@@ -883,12 +889,13 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="scripts/index.js" type="text/javascript"></script>
 <script src="scripts/tasks.js" type="text/javascript"></script>
 <script src="scripts/calendar.js" type="text/javascript"></script>
+<script src="scripts/datatable.js"></script>
+<script src="scripts/table-advanced.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
    App.init(); // initlayout and core plugins
    Index.init();
-   Index.initJQVMAP(); // init index page's custom scripts
    Index.initCalendar(); // init index page's custom scripts
    Index.initCharts(); // init index page's custom scripts
    Index.initChat();
