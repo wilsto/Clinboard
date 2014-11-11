@@ -1,22 +1,20 @@
 'use strict';
 
 angular.module('clinBoardApp')
-.controller('MainCtrl', function($rootScope, $scope, $http, $location,$compile){
+.controller('headerCtrl', function($rootScope, $scope){
+// une fois le rendu terminé
+	$scope.$on('tasksok', function(ngRepeatFinishedEvent) {
+		$scope.tasks = $rootScope.tasks;
+	});
+});
 
-	$scope.LoadDashboards = function(){
-		$http.get('/REST/dashboards').success(function (data) {
-			$scope.dashboards = data;
-		});
-	};
+angular.module('clinBoardApp')
+.controller('MainCtrl', function($rootScope, $scope, $http, $location,$compile, dashboards, tasks){
 
-	$scope.openDashboard = function(dashboard){
-		event.preventDefault();
-		
-		$rootScope.perimeter = dashboard;
-		$location.path( "/dash" );
-	};
-
-	$scope.LoadDashboards();
+	$scope.dashboards = dashboards.data;
+	$scope.tasks = tasks.data;
+	$rootScope.tasks = tasks.data;
+	$scope.$emit('tasksok');
 
 	//Initialize & config popover controls
 	$('#dashboard-report-supervision').popover({ html : true })

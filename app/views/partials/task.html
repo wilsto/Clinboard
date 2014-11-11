@@ -153,10 +153,10 @@
 												<h1>{{task.name}}</h1><br/>
 												<ul class="list list-inline">
 													<li>
-														 <i class="fa fa-map-marker"></i><span style="color:lightgrey"> Context </span> {{task.Contexte.name}}
+														 <i class="fa fa-map-marker"></i><span style="color:lightgrey"> Context </span> {{task.Contexte}}
 													</li><br/><br/>
 													<li>
-														 <i class="fa fa-calendar"></i><span style="color:lightgrey"> Activity </span>  {{task.Activity.name}}
+														 <i class="fa fa-calendar"></i><span style="color:lightgrey"> Activity </span>  {{task.Activity}}
 													</li>
 												</ul>
 											</div>
@@ -178,14 +178,14 @@
 																METRICS COUNT <i class="fa fa-img-up"></i>
 																</span>
 																<span class="sale-num">
-																{{task.Mesures.length}} </span>
+																{{task.mesures.length}} </span>
 															</li>
 															<li>
 																<span class="sale-info">
 																LAST ENTRY <i class="fa fa-img-down"></i>
 																</span>
 																<span class="sale-num">
-																{{task.Mesures[task.Mesures.length-1].date  | date:'shortDate'}} </span>
+																{{task.mesures[task.mesures.length-1].date  | date:'shortDate'}} </span>
 															</li>
 														</ul>
 													</div>
@@ -213,14 +213,14 @@
 										<th>Confiance</th>
 										<th>Fin</th>
 										<th>Comments</th>
-										<th><button ng-click='openMesure(task.Mesures[task.Mesures.length-1],true)' type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button></th>
+										<th><button ng-click='openMesure(task.mesures[task.mesures.length-1],true)' type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button></th>
 									</tr>
 									</thead>
 									<tbody>
-									<tr ng-repeat="mesure in task.Mesures | filter:search | orderBy:'date' track by $index" ng-show="mesure._id">
+									<tr ng-repeat="mesure in task.mesures | filter:search | orderBy:'date' track by $index" ng-show="mesure._id">
 										<td>{{mesure.date | date:'shortDate'}}</td>
-										<td>{{mesure.Activity.replace(task.Activity.name,"#")}}</td>
-										<td>{{mesure.Contexte.replace(task.Contexte.name,"#")}}</td>
+										<td>{{mesure.Activity.replace(task.Activity,"#")}}</td>
+										<td>{{mesure.Contexte.replace(task.Contexte,"#")}}</td>
 										<td>{{mesure.startDate | date:'shortDate'}}</td>
 										<td>{{mesure.charge}}</td>
 										<td>{{mesure.status}}</td>

@@ -1,38 +1,10 @@
 'use strict';
 
 angular.module('clinBoardApp')
-  .controller('taskCtrl', function($rootScope, $scope, $http, $modal, $routeParams){
+  .controller('taskCtrl', function($rootScope, $scope, $http, $modal, $routeParams, tasks){
 
-  $scope.LoadTask = function(){
-   $http.get('/REST/taches/'+$routeParams.taskId).success(function (data) {
-        $scope.task = data[0];
-
-
-      // decoder le contexte et les activités pour les task
-      //Join json
-        var even = _.where($rootScope.contextes, {id: $scope.task.refContexte});
-        $scope.task.Contexte = even[0];
-        var even = _.where($rootScope.activities, {id: $scope.task.refActivity});
-        $scope.task.Activity = even[0];
-
-        // Aller chercher les mesures par contexte et les activités 
-        $http.get('/REST/mesures/bytask/'+$scope.task.refContexte+'/'+$scope.task.refActivity).success(function (mesures) {
-          $scope.task.Mesures = mesures;
-
-          // decoder le contexte et les activités pour les mesures
-          _.each(_.keys($scope.task.Mesures), function(keyM) {
-            var even = _.where($rootScope.contextes, {id: $scope.task.Mesures[keyM].refcontexte});
-            $scope.task.Mesures[keyM].Contexte = even[0].name;
-            var even = _.where($rootScope.activities, {id: $scope.task.Mesures[keyM].refActivity});
-            $scope.task.Mesures[keyM].Activity = even[0].name;
-          });
-        });
-                console.log($scope.task);
-      });     
- }
-
- $scope.LoadTask();
-
+  console.log(tasks.data[0]);
+  $scope.task = tasks.data[0];
 
   /**
    * Modal
@@ -106,9 +78,7 @@ angular.module('clinBoardApp')
   // Please note that $modalInstance represents a modal window (instance) dependency. It is not the same as the $modal service used above.
   var MesureInstanceCtrl = function ($rootScope, $scope, $modalInstance) {
     $scope.formData = $scope.mesure;
-    $scope.activities = $rootScope.activities;
-    $scope.contextes = $rootScope.contextes;
-
+    console.log( $scope.formData );
     $scope.today = function() {
       $scope.date = new Date();
     };
@@ -160,8 +130,6 @@ angular.module('clinBoardApp')
     };
 
     $scope.format = 'dd-MMMM-yyyy';
-
-
 
 $scope.setContextId = function(parent) {
   $scope.formData.refContexte = parent.id;

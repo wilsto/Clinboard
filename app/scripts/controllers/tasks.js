@@ -10,20 +10,6 @@ angular.module('clinBoardApp')
 
   $scope.LoadWidgets = function(){
       $scope.taches = tasks.data;
-
-      // decoder le contexte et les activités pour les taches
-      //Join json
-      _.each(_.keys($scope.taches), function(key) {
-          var even = _.where($rootScope.contextes, {id: $scope.taches[key].refContexte});
-          $scope.taches[key].Contexte = even[0];
-          var even = _.where($rootScope.activities, {id: $scope.taches[key].refActivity});
-          $scope.taches[key].Activity = even[0];
-
-          $http.get('/REST/mesures/bytask/'+$scope.taches[key].refContexte+'/'+$scope.taches[key].refActivity).success(function (mesures) {
-                $scope.taches[key].Mesures = mesures;
-          })
-      });     
-
  }
 
  $scope.LoadWidgets();

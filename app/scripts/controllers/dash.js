@@ -109,19 +109,17 @@ $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
 
 	$scope.summary.metrics.sum = result;
 
-	$scope.summary.trust.sum =_.reduce($scope.summary.trust.list, function(sum, num)
+	$scope.summary.trust.sum = parseInt(_.reduce($scope.summary.trust.list, function(sum, num)
 		{
 				return sum + num;
-		}, 0) / $scope.summary.trust.list.length;
+		}, 0) / $scope.summary.trust.list.length);
 
 
-	$scope.summary.goals.sum =_.reduce($scope.summary.goals.list, function(sum, num)
+	$scope.summary.goals.sum =parseInt(_.reduce($scope.summary.goals.list, function(sum, num)
 		{
 				return sum + num;
-		}, 0) / $scope.summary.goals.list.length;
+		}, 0) / $scope.summary.goals.list.length);
 
-
-	console.log($scope.summary);
 });
 
 $scope.myFilter = function (item) { 

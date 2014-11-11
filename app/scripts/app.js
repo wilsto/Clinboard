@@ -22,6 +22,12 @@ app.config(function ($routeProvider, $locationProvider) {
         resolve: {
           initData: function(srvLibrary) {
             return srvLibrary.getInitData();
+          },
+          dashboards: function(srvLibrary) {
+            return srvLibrary.getDashBoards();
+          },
+          tasks: function(srvLibrary) {
+            return srvLibrary.getTasks();
           }
         }
       }) 
@@ -62,15 +68,6 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/tasks',
         controller: 'tasksCtrl',
         resolve: {
-          activities: function(srvLibrary) {
-            return srvLibrary.getActivities();
-          },
-          contextes: function(srvLibrary) {
-            return srvLibrary.getContextes();
-          },
-          axes: function(srvLibrary) {
-            return srvLibrary.getAxes();
-          },
           tasks: function(srvLibrary) {
             return srvLibrary.getTasks();
           }
@@ -80,14 +77,8 @@ app.config(function ($routeProvider, $locationProvider) {
         templateUrl: 'partials/task',
         controller: 'taskCtrl',
         resolve: {
-          activities: function(srvLibrary) {
-            return srvLibrary.getActivities();
-          },
-          contextes: function(srvLibrary) {
-            return srvLibrary.getContextes();
-          },
-          axes: function(srvLibrary) {
-            return srvLibrary.getAxes();
+          tasks: function(srvLibrary, $route) {
+            return srvLibrary.getTasks($route.current.params.taskId);
           }
         }
       })  
