@@ -1,11 +1,20 @@
 'use strict';
 
 angular.module('clinBoardApp')
-  .controller('indicatorCtrl', function($rootScope, $scope, $http, $modal, indicators){
+  .controller('indicatorCtrl', function($rootScope, $scope, $http, $modal, indicators,calLibrary){
 
    $scope.indicator = indicators.data[0];
 
  
+// une fois le rendu terminé
+$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+
+    var resultCumul = calLibrary.getSumCumul( $scope.indicator.mesureRef, $scope.indicator.mesureVal);
+    Index.initCharts(resultCumul.ref, resultCumul.val); // init index page's custom scripts
+    Index.initKnowElements(250);
+
+});
+
   /**
    * Modal
    */

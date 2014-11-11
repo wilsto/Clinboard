@@ -11,6 +11,71 @@ angular.module('clinBoardApp').service('profile', function() {
     }
 });
 
+angular.module('clinBoardApp').factory('calLibrary', ['$http', '$rootScope', '$q', '$routeParams','$timeout',function($http,$rootScope,$q, $routeParams,$timeout) {
+	var sdo = {
+		getSumByMonth: function(data, field) {
+				console.log('data',data);
+
+				var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+				  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+				var map_result = _.map(data, function (item) {
+				  var d = new Date(new Number(new Date(item[field])));
+				  var month = d.getFullYear()  + ", " +  monthNames[d.getMonth()];
+				  return {
+				      "Month": month,
+				      "User_Count": 1
+				  };
+				});
+
+				var result_temp = _.reduce(map_result, function (memo, item) {
+				  if (memo[item.Month] === undefined) {
+				      memo[item.Month] = item.User_Count;
+				  }else{
+				      memo[item.Month] += item.User_Count;
+				  }
+				  return memo;
+				},{});
+
+				//then wrap the result to the format you expected.
+				var result = _.map(result_temp, function(value, key){
+				  return {
+				      "Month": key,
+				      "User_Count": value
+				  };
+				});
+				console.log('result',result);
+				return result;
+		},
+		getSumCumul : function(ref, value){
+
+			var result={ref:[],val:[]};
+
+			/*cumulative à faire */
+			var lastval = 0;
+			$.each(ref, function( indexref, valueref ) {
+				result.ref.push([indexref,indexref+1]);
+				var blnFind = false;
+			  	$.each(value, function( index, value ) {
+			  		if (valueref.date == value.date) {
+			  			blnFind = true;
+			  			lastval = index+1;
+			  		} 
+				});
+			  	result.val.push([indexref,lastval]);
+			});
+
+/*			var result = myarray.concat();
+			for (var i = 0; i < myarray.length; i++){
+			    result[i] = myarray.slice(0, i + 1).reduce(function(p, i){ return p + i; });
+			}*/
+			console.log('resultCumul',result);
+			return result;
+		}
+	}
+	return sdo;
+}]);
+
 angular.module('clinBoardApp').factory('srvLibrary', ['$http', '$rootScope', '$q', '$routeParams','$timeout',function($http,$rootScope,$q, $routeParams,$timeout) {
 	var sdo = {
 		getActivities: function() {

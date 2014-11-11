@@ -36,7 +36,7 @@
         <span class="bar-chart">
           5, 6, 7, 11, 14, 10, 15, 19, 15, 2 </span>
           <div class="percent">
-           +66%
+           +8%
          </div>
        </div>
        <div class="details">
@@ -59,9 +59,9 @@
     <div class="stats-overview stat-block">
       <div class="display stat good huge">
         <span class="bar-chart">
-          2,6,8,12, 11, 15, 16</span>
+          1,1,2,2,3,4,5,5,5,5</span>
           <div class="percent">
-           +16%
+           +0%
          </div>
        </div>
        <div class="details">
@@ -85,7 +85,7 @@
     <div class="stats-overview stat-block">
       <div class="display stat ok huge">
         <span class="bar-chart">
-          2,6,8,12, 11, 15, 16, 2, 4, 12, 19 </span>
+          2,6,8,12, 11, 15, 16, 16, 14, 12, 16 </span>
           <div class="percent">
            +12%
          </div>
@@ -95,7 +95,7 @@
          Trust
        </div>
        <div class="numbers">
-        {{summary.trust.sum}}
+        {{summary.trust.sum}}%
       </div>
       <div class="progress">
         <span style="width:  {{summary.trust.sum}}%;" class="progress-bar progress-bar-info" aria-valuenow=" {{summary.trust.sum}}" aria-valuemin="0" aria-valuemax="100">
@@ -111,9 +111,9 @@
   <div class="stats-overview stat-block">
     <div class="display stat bad huge">
       <span class="bar-chart">
-        2,6,8,11, 14, 11, 12, 13, 15, 12, 15, 9,3 </span>
+        2,0,3,1, 3, 1, 0, 0, 1, 2, 1, 1,0 </span>
         <div class="percent">
-         +6%
+         -100%
        </div>
      </div>
      <div class="details">
@@ -136,9 +136,9 @@
   <div class="stats-overview stat-block">
     <div class="display stat good huge">
       <span class="bar-chart">
-        1,4,9,12, 10, 11, 12, 15, 12, 11, 9, 12, 15, 19, 14, 13, 15 </span>
+        1,4,9,12, 10, 11, 9, 14, 13, 15 </span>
         <div class="percent">
-         +86%
+         +16%
        </div>
      </div>
      <div class="details">
@@ -146,7 +146,7 @@
        Goals
      </div>
      <div class="numbers">
-      {{summary.goals.list.length}}
+      {{summary.goals.sum}}% 
     </div>
     <div class="progress">
       <span style="width: 56%;" class="progress-bar progress-bar-success" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100">
@@ -167,7 +167,7 @@
     <div class="portlet">
       <div class="portlet-title">
         <div class="caption">
-          <i class="fa fa-calendar"></i>Indicators Timeline
+          <i class="fa fa-calendar"></i>KPIs Timeline
         </div>
         
       </div>
@@ -285,7 +285,7 @@
 
               <div class="media-body">
                 <span style="max-height:10px"><small>{{indicateur.name}}</small></span>
-                <h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">{{indicateur.mesureVal}} <small> / {{indicateur.reference}}</small></h2>
+                <h2 class="media-heading animate-number" data-value="3659" data-animation-duration="1500">{{indicateur.mesureValCal}} <small> / {{indicateur.mesureRefCal}}</small></h2>
               </div>
             </div> 
 

@@ -13,9 +13,17 @@ div.visual {
 div.visual div {
 	display:block!important;
 	margin-top:-50px;
+	margin-left:10px;
 }
 
+div.visual.big {
+	height: 300px;
+}
 
+div.visual.big div {
+	display:block!important;
+	margin-top:0px;
+}
 .bar-chart {
 	display: none!important;
 }

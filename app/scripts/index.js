@@ -133,52 +133,27 @@ var Index = function () {
                 header: h,
                 editable: true,
                 events: [{
-                        title: 'All Day Event',                        
-                        start: new Date(y, m, 1),
+                        title: 'Activity : Analysis Datasets : Start',                        
+                        start: new Date(y, m, 3),
+                        backgroundColor: App.getLayoutColorCode('blue')
+                    }, {
+                        title: 'Context : CL3-78989-012 : FVFP',
+                        start: new Date(y, m, d),
+                        backgroundColor: App.getLayoutColorCode('green')
+                    },{
+                        title: 'Activity : Blind Review : Meeting',                        
+                        start: new Date(y, m, 27),
+                        backgroundColor: App.getLayoutColorCode('blue')
+                    },{
+                        title: 'Metrics : Fill KPI "AMGEN"',                        
+                        start: new Date(y, m, 21),
                         backgroundColor: App.getLayoutColorCode('yellow')
-                    }, {
-                        title: 'Long Event',
-                        start: new Date(y, m, d - 5),
-                        end: new Date(y, m, d - 2),
-                        backgroundColor: App.getLayoutColorCode('green')
-                    }, {
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d - 3, 16, 0),
-                        allDay: false,
-                        backgroundColor: App.getLayoutColorCode('red')
-                    }, {
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d + 4, 16, 0),
-                        allDay: false,
-                        backgroundColor: App.getLayoutColorCode('green')
-                    }, {
-                        title: 'Meeting',
-                        start: new Date(y, m, d, 10, 30),
-                        allDay: false,
-                    }, {
-                        title: 'Lunch',
-                        start: new Date(y, m, d, 12, 0),
-                        end: new Date(y, m, d, 14, 0),
-                        backgroundColor: App.getLayoutColorCode('grey'),
-                        allDay: false,
-                    }, {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d + 1, 19, 0),
-                        end: new Date(y, m, d + 1, 22, 30),
-                        backgroundColor: App.getLayoutColorCode('purple'),
-                        allDay: false,
-                    }, {
-                        title: 'Click for Google',
-                        start: new Date(y, m, 28),
-                        end: new Date(y, m, 29),
-                        backgroundColor: App.getLayoutColorCode('yellow'),
-                        url: 'http://google.com/',
                     }
                 ]
             });
         },
 
-        initCharts: function () {
+        initCharts: function (mesureRef,mesureVal) {
             if (!jQuery.plot) {
                 return;
             }
@@ -186,26 +161,8 @@ var Index = function () {
             var data = [];
             var totalPoints = 250;
 
-            // random data generator for plot charts
-
-            function getRandomData() {
-                if (data.length > 0) data = data.slice(1);
-                // do a random walk
-                while (data.length < totalPoints) {
-                    var prev = data.length > 0 ? data[data.length - 1] : 50;
-                    var y = prev + Math.random() * 10 - 5;
-                    if (y < 0) y = 0;
-                    if (y > 100) y = 100;
-                    data.push(y);
-                }
-                // zip the generated y values with the x values
-                var res = [];
-                for (var i = 0; i < data.length; ++i) res.push([i, data[i]])
-                return res;
-            }
-
             function showTooltip(title, x, y, contents) {
-                $('<div id="tooltip" class="chart-tooltip"><div class="date">' + title + '<\/div><div class="label label-success">CTR: ' + x / 10 + '%<\/div><div class="label label-danger">Imp: ' + x * 12 + '<\/div><\/div>').css({
+                $('<div id="tooltip" class="chart-tooltip"><div class="date">' + title + '<\/div><div class="label label-success">Ref: ' + x / 10 + '%<\/div><div class="label label-danger">Val: ' + x * 12 + '<\/div><\/div>').css({
                     position: 'absolute',
                     display: 'none',
                     top: y - 100,
@@ -217,75 +174,21 @@ var Index = function () {
                 }).appendTo("body").fadeIn(200);
             }
 
-            function randValue() {
-                return (Math.floor(Math.random() * (1 + 50 - 20))) + 10;
-            }
-
-            var pageviews = [
-                [1, randValue()],
-                [2, randValue()],
-                [3, 2 + randValue()],
-                [4, 3 + randValue()],
-                [5, 5 + randValue()],
-                [6, 10 + randValue()],
-                [7, 15 + randValue()],
-                [8, 20 + randValue()],
-                [9, 25 + randValue()],
-                [10, 30 + randValue()],
-                [11, 35 + randValue()],
-                [12, 25 + randValue()],
-                [13, 15 + randValue()],
-                [14, 20 + randValue()],
-                [15, 45 + randValue()],
-                [16, 50 + randValue()],
-                [17, 65 + randValue()],
-                [18, 70 + randValue()],
-                [19, 85 + randValue()],
-                [20, 80 + randValue()],
-                [21, 75 + randValue()],
-                [22, 80 + randValue()],
-                [23, 75 + randValue()],
-                [24, 70 + randValue()],
-                [25, 65 + randValue()],
-                [26, 75 + randValue()],
-                [27, 80 + randValue()],
-                [28, 85 + randValue()],
-                [29, 90 + randValue()],
-                [30, 95 + randValue()]
+/*            var mesureRef = [
+                [1, 1],
+                [2, 2],
+                [3, 3],
+                [4, 4],
+                [5, 5]
             ];
 
-            var visitors = [
-                [1, randValue() - 5],
-                [2, randValue() - 5],
-                [3, randValue() - 5],
-                [4, 6 + randValue()],
-                [5, 5 + randValue()],
-                [6, 20 + randValue()],
-                [7, 25 + randValue()],
-                [8, 36 + randValue()],
-                [9, 26 + randValue()],
-                [10, 38 + randValue()],
-                [11, 39 + randValue()],
-                [12, 50 + randValue()],
-                [13, 51 + randValue()],
-                [14, 12 + randValue()],
-                [15, 13 + randValue()],
-                [16, 14 + randValue()],
-                [17, 15 + randValue()],
-                [18, 15 + randValue()],
-                [19, 16 + randValue()],
-                [20, 17 + randValue()],
-                [21, 18 + randValue()],
-                [22, 19 + randValue()],
-                [23, 20 + randValue()],
-                [24, 21 + randValue()],
-                [25, 14 + randValue()],
-                [26, 24 + randValue()],
-                [27, 25 + randValue()],
-                [28, 26 + randValue()],
-                [29, 27 + randValue()],
-                [30, 31 + randValue()]
-            ];
+            var mesureVal = [
+                [1, 1],
+                [2, 2],
+                [3, 2],
+                [4, 3],
+                [5, 3]
+            ];*/
 
             if ($('#site_statistics').size() != 0) {
 
@@ -293,11 +196,11 @@ var Index = function () {
                 $('#site_statistics_content').show();
 
                 var plot_statistics = $.plot($("#site_statistics"), [{
-                        data: pageviews,
-                        label: "Unique Visits"
+                        data: mesureRef,
+                        label: "Reference"
                     }, {
-                        data: visitors,
-                        label: "Page Views"
+                        data: mesureVal,
+                        label: "Focus"
                     }
                 ], {
                     series: {
@@ -325,7 +228,7 @@ var Index = function () {
                         tickColor: "#eee",
                         borderWidth: 0
                     },
-                    colors: ["#d12610", "#37b7f3", "#52e136"],
+                    colors: ["#37b7f3", "#d12610", "#d12610"],
                     xaxis: {
                         ticks: 11,
                         tickDecimals: 0
@@ -345,7 +248,7 @@ var Index = function () {
                             previousPoint = item.dataIndex;
 
                             $("#tooltip").remove();
-                            var x = item.datapoint[0].toFixed(2),
+                            var x =" item.datapoint[0].toFixed(2)",
                                 y = item.datapoint[1].toFixed(2);
 
                             showTooltip('24 Jan 2013', item.pageX, item.pageY, item.series.label + " of " + x + " = " + y);
@@ -650,7 +553,7 @@ var Index = function () {
             });
         },
 
-        initKnowElements : function () {
+        initKnowElements : function (width) {
             //knob does not support ie8 so skip it
             if (!jQuery().knob || App.isIE8()) {
                 return;
@@ -660,8 +563,8 @@ var Index = function () {
                 $(".knobify").knob({
                     readOnly: true,
                     skin: "tron",
-                    'width': 100,
-                    'height': 100,
+                    'width': width,
+                    'height': width,
                     'dynamicDraw': true,
                     'thickness': 0.2,
                     'tickColorizeValues': true,
@@ -813,7 +716,7 @@ var Index = function () {
                 startDate: moment().subtract('days', 29),
                 endDate: moment(),
                 minDate: '01/01/2012',
-                maxDate: '12/31/2014',
+                maxDate: '12/31/2015',
                 dateLimit: {
                     days: 60
                 },
@@ -821,14 +724,15 @@ var Index = function () {
                 showWeekNumbers: true,
                 timePicker: false,
                 timePickerIncrement: 1,
-                timePicker12Hour: true,
+                timePicker12Hour: false,
                 ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
                     'Last 7 Days': [moment().subtract('days', 6), moment()],
                     'Last 30 Days': [moment().subtract('days', 29), moment()],
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                    'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')],
+                    'Last 365 days': [moment().subtract('days', 365).startOf('month'), moment().subtract('month', 1).endOf('month')],
+                    'Last Exercice': [moment().subtract('days', 29), moment()],
+                    'This Exercice': [moment().subtract('days', 29), moment()]
                 },
                 buttonClasses: ['btn'],
                 applyClass: 'btn-success',
@@ -852,7 +756,7 @@ var Index = function () {
             );
 
 
-            $('#dashboard-report-range span').html(moment().subtract('days', 29).format('MMM DD YYYY') + ' - ' + moment().format('MMM DD YYYY'));
+            $('#dashboard-report-range span').html(moment().subtract('days', 365).startOf('month').format('MMM DD YYYY') + ' - ' + moment().subtract('month', 1).endOf('month').format('MMM DD YYYY'));
             $('#dashboard-report-range').show();
         },
 

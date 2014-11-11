@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('clinBoardApp')
-.controller('dashCtrl', function ($rootScope, $scope, $modal, $http, $dialogs, $filter, $q, $compile, $routeParams,indicateurs,dashboards) {
+.controller('dashCtrl', function ($rootScope, $scope, $modal, $http, $dialogs, $filter, indicateurs,dashboards,calLibrary) {
 
-	$scope.summary =[];
 	$rootScope.perimeter = dashboards.data[0];
 
 	//Initialize & config popover controls
@@ -19,6 +18,8 @@ angular.module('clinBoardApp')
 $scope.LoadWidgets = function(){
 
 		$scope.indicateurs = indicateurs.data;
+
+		$scope.summary =[];
 
 		/* ------------------------*/
 		$scope.summary.indicateurs = {list:[],sum:[]}
@@ -46,6 +47,8 @@ $scope.LoadWidgets = function(){
 				$.each(rowdata.tasks, function(index, task) {
 					$scope.summary.tasks.list.push(task);
 				});
+				if (typeof rowdata.percentObjectif !== 'undefined' && !isNaN(parseInt(rowdata.percentObjectif)) ) {$scope.summary.goals.list.push(parseInt(rowdata.percentObjectif));}
+
 			}
 		});
 	
@@ -58,15 +61,19 @@ $scope.LoadWidgets();
 $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
 
 
-                $(".chrono.bar-chart").peity("bar", {
-                    height: 30,
-                    width: 100,
-                     fill: function(value) {
-                        return value > 10 ? "green" : "red"
-                      }
-                }).show();
+    $(".chrono.bar-chart").peity("bar", {
+        height: 30,
+        width: 100,
+         fill: function(value) {
+            return value > 10 ? "green" : "red"
+          }
+    }).show();
 
     Index.initPeityElements();
+
+
+   // var resultVal = calLibrary.getSumByMonth( $scope.indicator.mesureVal, 'date');
+   // var resultRef = calLibrary.getSumByMonth( $scope.indicator.mesureRef, 'date');
 
 
 	var data = $scope.summary.metrics.list;
@@ -101,18 +108,20 @@ $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
 	});
 
 	$scope.summary.metrics.sum = result;
+
 	$scope.summary.trust.sum =_.reduce($scope.summary.trust.list, function(sum, num)
 		{
 				return sum + num;
 		}, 0) / $scope.summary.trust.list.length;
-	console.log($scope.summary);
 
-	/*cumulative à faire */
-	var myarray = [5, 10, 3, 2];
-	var result = myarray.concat();
-	for (var i = 0; i < myarray.length; i++){
-	    result[i] = myarray.slice(0, i + 1).reduce(function(p, i){ return p + i; });
-	}
+
+	$scope.summary.goals.sum =_.reduce($scope.summary.goals.list, function(sum, num)
+		{
+				return sum + num;
+		}, 0) / $scope.summary.goals.list.length;
+
+
+	console.log($scope.summary);
 });
 
 $scope.myFilter = function (item) { 
