@@ -55,12 +55,13 @@
 
 <div id="home">
     <tabset justified="false">
-        <tab heading="Indicateurs" select="loadData('indicateurs')"></tab>
-        <tab heading="Taches" select="loadData('taches')"></tab>
-        <tab heading="Mesures" select="loadData('mesures')"></tab>
-        <tab heading="Contexte" select="loadData('contextes')"></tab>
+            <tab heading="Contexte" select="loadData('contextes')"></tab>
         <tab heading="Activités" select="loadData('activities')"></tab>
         <tab heading="Axes" select="loadData('axes')"></tab>
+        <tab heading="Indicateurs" select="loadData('indicateurs')" ng-show="1==2"></tab>
+        <tab heading="Taches" select="loadData('taches')" ng-show="1==2"></tab>
+        <tab heading="Mesures" select="loadData('mesures')" ng-show="1==2"></tab>
+
     </tabset>
     <div class="stretch col-md-11" >
 

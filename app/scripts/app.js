@@ -8,6 +8,7 @@ var app = angular.module('clinBoardApp', [
   'ngAnimate',
   'ui.bootstrap',
   'dialogs',
+  'ngTable',
   'angular.directives-round-progress',
   'nvd3ChartDirectives',
   'xeditable',
@@ -28,6 +29,9 @@ app.config(function ($routeProvider, $locationProvider) {
           },
           tasks: function(srvLibrary) {
             return srvLibrary.getTasks();
+          },
+          indicateurs: function(srvLibrary) {
+            return srvLibrary.getIndicateurs();
           }
         }
       }) 
@@ -144,7 +148,7 @@ app.constant('categoryInd',
 [                                                                                                                                                                                                             
   {name: 'Objectif'},                                                                                                                                                                                                                         
   {name: 'Alerte'},                                                                                                                                                                                                                         
-  {name: 'Anticpation'},
+  {name: 'Anticipation'},
   {name: 'Information'}
 ]);
 

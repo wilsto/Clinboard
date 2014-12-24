@@ -26,7 +26,7 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: process.env.PORT || 9001
       },
       dev: {
         options: {
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
-          livereload: true
+          livereload: false
         }
       },
       mochaTest: {
@@ -78,7 +78,7 @@ module.exports = function (grunt) {
         ],
       
         options: {
-          livereload: true
+          livereload: false
         }
       },
       express: {
@@ -88,7 +88,7 @@ module.exports = function (grunt) {
         ],
         tasks: ['newer:jshint:server', 'express:dev', 'wait'],
         options: {
-          livereload: true,
+          livereload: false,
           nospawn: true //Without this option specified express won't be reloaded
         }
       }
@@ -182,7 +182,7 @@ module.exports = function (grunt) {
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
-            PORT: process.env.PORT || 9000
+            PORT: process.env.PORT || 9001
           },
           callback: function (nodemon) {
             nodemon.on('log', function (event) {
